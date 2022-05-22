@@ -1,0 +1,17 @@
+[@b.head/]
+[@b.toolbar title="修改或新增主机"]bar.addBack();[/@]
+
+[@b.form action=b.rest.save(host)theme="list"]
+  [@b.field label="配置"]${profile.name} ${profile.title}[/@]
+  [@b.textfield label="common.name" name="host.name" value="${host.name!}" style="width:200px;" required="true" maxlength="100" /]
+  [@b.textfield label="IP" name="host.ip" value=host.ip required="true" /]
+  [@b.number label="内存" name="host.memory" value=host.memory! required="true" maxlength="10" comment="GB"/]
+  [@b.textfield label="CPU规格" name="host.cpu" value=host.cpu! required="true" maxlength="100" style="width:300px;"  /]
+  [@b.number label="CPU核心数" name="host.cores" value=host.cores!  required="true" maxlength="10"/]
+  [@b.textfield label="操作系统" name="host.os" value=host.os! required="true" maxlength="80" style="width:200px;"  /]
+  [@b.formfoot]
+    <input type="hidden" value="${profile.id}" name="host.profile.id"/>
+    [@b.reset/] &nbsp;&nbsp;[@b.submit value="action.submit" /]
+  [/@]
+[/@]
+[@b.foot/]

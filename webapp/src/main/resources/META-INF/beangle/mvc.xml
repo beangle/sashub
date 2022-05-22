@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<mvc>
+  <profile name="sas-admin" package="org.beangle.sasadmin.web.action">
+    <url path="/" suffix="" style="seo" />
+    <interceptors>
+      <interceptor name="web.Interceptor.hibernate" />
+      <interceptor name="web.Interceptor.security" />
+    </interceptors>
+  </profile>
+
+  <profile name="sas-admin-ws" package="org.beangle.sasadmin.web.ws">
+    <action suffix="WS" defaultMethod="index" />
+    <url path="/" suffix="" style="plur-seo" />
+    <interceptors>
+      <interceptor name="web.Interceptor.hibernate" />
+    </interceptors>
+  </profile>
+</mvc>
