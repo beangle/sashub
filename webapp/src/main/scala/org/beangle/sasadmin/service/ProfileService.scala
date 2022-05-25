@@ -22,4 +22,6 @@ import org.beangle.sasadmin.model.config.Profile
 trait ProfileService {
 
   def getProfile(name: String): Option[Profile]
+
+  def getAll(): Seq[Profile]
 }

@@ -40,7 +40,7 @@
         <td class="title" >部署情况:</td>
         <td class="content" colspan="3">
         [#list webapps as webapp]
-          ${webapp.profile.title} ${webapp.version} ${webapp.contextPath}[#sep]<br>
+          ${webapp.profile.org.title} ${webapp.profile.title} ${webapp.version} ${webapp.contextPath}[#sep]<br>
         [/#list]
         </td>
       </tr>

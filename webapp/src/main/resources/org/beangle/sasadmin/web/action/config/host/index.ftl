@@ -5,7 +5,7 @@
     [@b.form name="hostSearchForm" action="!search" target="hostlist" title="ui.searchForm" theme="search"]
       [@b.textfields names="host.name;名称"/]
       [@b.textfields names="host.ip;IP"/]
-      [@b.select name="host.profile.id" items=profiles label="配置" value=profile! option="id,qualifiedName"/]
+      [@b.select name="host.profile.id" items=profiles label="配置" value=profile! option="id,qualifiedTitle"/]
       <input type="hidden" name="orderBy" value="host.name"/>
     [/@]
  </div>

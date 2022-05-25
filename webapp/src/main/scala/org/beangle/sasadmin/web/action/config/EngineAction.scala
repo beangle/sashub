@@ -19,6 +19,7 @@ package org.beangle.sasadmin.web.action.config
 
 import org.beangle.commons.lang.Strings
 import org.beangle.sasadmin.model.config.{Engine, Profile}
+import org.beangle.sasadmin.service.ProfileService
 import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.action.RestfulAction
 
@@ -26,8 +27,10 @@ import org.beangle.webmvc.support.action.RestfulAction
  */
 class EngineAction extends RestfulAction[Engine] {
 
+  var profileService: ProfileService = _
+
   override protected def editSetting(entity: Engine): Unit = {
-    put("profiles", entityDao.getAll(classOf[Profile]))
+    put("profiles", profileService.getAll())
     put("types", Engine.types)
     super.editSetting(entity)
   }

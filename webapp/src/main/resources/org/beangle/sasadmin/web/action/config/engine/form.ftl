@@ -24,7 +24,7 @@ ${l}
   [@b.radios label="websocket" name="engine.websocketSupport" value=engine.websocketSupport items="1:支持,0:不支持"/]
   [@b.textarea name="listeners" label="监听器" value=listeners  maxlength="500" cols="60"/]
   [@b.textarea name="jars" label="Jars" value=jars maxlength="500" cols="60"/]
-  [@b.select label="针对配置" name="engine.profile.id" value=engine.profile! items=profiles empty="全局"/]
+  [@b.select label="针对配置" name="engine.profile.id" value=engine.profile! items=profiles empty="全局" option="id,qualifiedName"/]
   [@b.formfoot]
     [@b.reset/]&nbsp;&nbsp;[@b.submit value="action.submit" /]
   [/@]

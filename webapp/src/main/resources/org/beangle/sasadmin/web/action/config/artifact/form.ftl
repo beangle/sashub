@@ -8,6 +8,9 @@
   [@b.radios label="打包类型" name="artifact.packaging" value=artifact.packaging! required="true" items= packagings comment="packaging"/]
   [@b.textfield label="分类器" name="artifact.classifier" value=artifact.classifier! maxlength="100" comment="classifier"/]
   [@b.textfield label="最新版本" name="artifact.latestVersion" value=artifact.latestVersion required="true" maxlength="100" /]
+  [@b.textfield label="默认上下文" name="artifact.contextPath" value=artifact.contextPath! required="true" maxlength="100"/]
+
+  [@b.select label="针对配置" name="artifact.profile.id" value=artifact.profile! items=profiles empty="..." option="id,qualifiedName"/]
   [@b.textarea label="介绍" name="artifact.description" value=artifact.description! required="true"  rows="5" cols="80" maxlength="500"/]
   [@b.radios label="需要解析" name="artifact.resolveSupport" value=artifact.resolveSupport! items="1:支持,0:不支持" comment="是否包含META-INF/beangle/dependencies"/]
   [@b.radios label="jspSupport" name="artifact.jspSupport" value=artifact.jspSupport! required="true"  /]

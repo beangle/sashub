@@ -19,6 +19,7 @@ package org.beangle.sasadmin.web.action.config
 
 import org.beangle.data.dao.OqlBuilder
 import org.beangle.sasadmin.model.config.{Engine, Farm, Host, Profile}
+import org.beangle.sasadmin.service.ProfileService
 import org.beangle.sasadmin.web.action.helper.ProfileHelper
 import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.action.RestfulAction
@@ -26,15 +27,16 @@ import org.beangle.webmvc.support.action.RestfulAction
 /** 群集管理
  */
 class FarmAction extends RestfulAction[Farm] {
-
-  override protected def indexSetting(): Unit = {
-    ProfileHelper.setRememberedProfile(entityDao)
-    put("profiles", entityDao.getAll(classOf[Profile]))
-  }
+  var profileService: ProfileService = _
 
   override def search(): View = {
     ProfileHelper.remember("farm.profile.id")
     super.search()
+  }
+
+  override protected def indexSetting(): Unit = {
+    ProfileHelper.setRememberedProfile(entityDao)
+    put("profiles", profileService.getAll())
   }
 
   override protected def editSetting(entity: Farm): Unit = {
@@ -47,7 +49,7 @@ class FarmAction extends RestfulAction[Farm] {
 
   override protected def saveAndRedirect(farm: Farm): View = {
     val profile = entityDao.get(classOf[Profile], longId("farm.profile"))
-    farm.profile=profile
+    farm.profile = profile
     super.saveAndRedirect(farm)
   }
 }

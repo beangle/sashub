@@ -19,6 +19,8 @@ package org.beangle.sasadmin.model.config
 
 import org.beangle.data.model.LongId
 
+/** 组件
+ */
 class Artifact extends LongId {
   var groupId: String = _
   var artifactId: String = _
@@ -30,6 +32,10 @@ class Artifact extends LongId {
   var resolveSupport: Boolean = _
   var jspSupport: Boolean = false
   var websocketSupport: Boolean = false
+  var profile: Option[Profile] = None
+  /** 推荐上下文设置
+   */
+  var contextPath: String = _
 
   def name: String = s"$groupId $artifactId"
 

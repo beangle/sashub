@@ -19,14 +19,15 @@ package org.beangle.sasadmin.web.action.config
 
 import org.beangle.data.dao.OqlBuilder
 import org.beangle.sasadmin.model.config.{Artifact, Profile, Server, Webapp}
+import org.beangle.sasadmin.service.ProfileService
 import org.beangle.sasadmin.web.action.helper.ProfileHelper
 import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.action.RestfulAction
 
-/**应用部署管理
+/** 应用部署管理
  */
 class WebappAction extends RestfulAction[Webapp] {
-
+  var profileService: ProfileService = _
   def upgrade(): View = {
     val webapps = entityDao.find(classOf[Webapp], longIds("webapp"))
     webapps.foreach { webapp =>
@@ -36,14 +37,14 @@ class WebappAction extends RestfulAction[Webapp] {
     redirect("search", "info.save.success")
   }
 
-  override protected def indexSetting(): Unit = {
-    ProfileHelper.setRememberedProfile(entityDao)
-    put("profiles", entityDao.getAll(classOf[Profile]))
-  }
-
   override def search(): View = {
     ProfileHelper.remember("webapp.profile.id")
     super.search()
+  }
+
+  override protected def indexSetting(): Unit = {
+    ProfileHelper.setRememberedProfile(entityDao)
+    put("profiles", profileService.getAll())
   }
 
   override protected def editSetting(webapp: Webapp): Unit = {
@@ -56,6 +57,7 @@ class WebappAction extends RestfulAction[Webapp] {
     val aquery = OqlBuilder.from(classOf[Artifact], "artifact")
     aquery.where("not exists(from " + classOf[Webapp].getName +
       " app where app.profile=:profile and app.artifact=artifact)", profile)
+    aquery.where("artifact.profile is null or artifact.profile=:profile", profile)
     val artifacts = entityDao.search(aquery).toBuffer
     if (webapp.persisted) artifacts.addOne(webapp.artifact)
     put("artifacts", artifacts)

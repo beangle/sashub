@@ -15,15 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.sasadmin.web.action
+package org.beangle.sasadmin.web.action.config
 
 import org.beangle.cdi.bind.BindModule
-import org.beangle.sasadmin.web.action.config
 
 class DefaultModule extends BindModule {
 
   protected override def binding(): Unit = {
-    bind(classOf[IndexAction])
+    bind(classOf[OrgAction])
+    bind(classOf[ProfileAction])
+    bind(classOf[EngineAction])
+    bind(classOf[FarmAction])
+    bind(classOf[ServerAction])
+    bind(classOf[HostAction])
+    bind(classOf[ArtifactAction])
+    bind(classOf[WebappAction])
   }
 
 }

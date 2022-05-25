@@ -45,4 +45,11 @@ class DefaultProfileService extends ProfileService {
     entityDao.search(query).headOption
   }
 
+  override def getAll(): Seq[Profile] = {
+    val query = OqlBuilder.from(classOf[Profile], "p")
+    query.cacheable()
+    val profiles = entityDao.search(query)
+    profiles.sortBy(_.qualifiedName)
+  }
+
 }

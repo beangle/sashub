@@ -18,6 +18,7 @@
 package org.beangle.sasadmin.web.action.config
 
 import org.beangle.sasadmin.model.config.{Host, Profile}
+import org.beangle.sasadmin.service.ProfileService
 import org.beangle.sasadmin.web.action.helper.ProfileHelper
 import org.beangle.web.action.context.{ActionContext, Params}
 import org.beangle.web.action.view.View
@@ -25,10 +26,11 @@ import org.beangle.web.servlet.util.CookieUtils
 import org.beangle.webmvc.support.action.RestfulAction
 
 class HostAction extends RestfulAction[Host] {
+  var profileService: ProfileService = _
 
   override protected def indexSetting(): Unit = {
     ProfileHelper.setRememberedProfile(entityDao)
-    put("profiles", entityDao.getAll(classOf[Profile]))
+    put("profiles", profileService.getAll())
   }
 
   override protected def editSetting(entity: Host): Unit = {

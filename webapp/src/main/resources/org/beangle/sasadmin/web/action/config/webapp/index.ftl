@@ -5,7 +5,7 @@
     [@b.form name="webappSearchForm" action="!search" target="webapplist" title="ui.searchForm" theme="search"]
       [@b.textfields names="webapp.artifact.artifactId;名称"/]
       [@b.textfields names="webapp.version;版本"/]
-      [@b.select name="webapp.profile.id" items=profiles label="配置" value=profile! option="id,qualifiedName"/]
+      [@b.select name="webapp.profile.id" items=profiles label="配置" value=profile! option="id,qualifiedTitle"/]
       <input type="hidden" name="orderBy" value="webapp.artifact.groupId"/>
     [/@]
  </div>

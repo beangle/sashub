@@ -52,4 +52,7 @@ class Profile extends LongId with Named {
     if null == org then name else org.name + "." + name
   }
 
+  def qualifiedTitle: String = {
+    if null == org then title else org.title + "." + title
+  }
 }

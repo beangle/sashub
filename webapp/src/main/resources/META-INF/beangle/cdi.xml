@@ -2,6 +2,7 @@
 <cdi>
   <container>
     <module class="org.beangle.sasadmin.web.action.DefaultModule"/>
+    <module class="org.beangle.sasadmin.web.action.config.DefaultModule"/>
     <module class="org.beangle.sasadmin.web.ws.DefaultModule"/>
     <module class="org.beangle.sasadmin.web.DaoModule"/>
     <module class="org.beangle.sasadmin.service.DefaultModule"/>
