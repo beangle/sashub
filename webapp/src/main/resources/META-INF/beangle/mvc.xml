@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <mvc>
-  <profile name="sas-admin" package="org.beangle.sasadmin.web.action">
+  <profile name="sas-admin" package="org.beangle.sashub.web.action">
     <url path="/" suffix="" style="seo" />
     <interceptors>
       <interceptor name="web.Interceptor.hibernate" />
@@ -8,7 +8,7 @@
     </interceptors>
   </profile>
 
-  <profile name="sas-admin-ws" package="org.beangle.sasadmin.web.ws">
+  <profile name="sas-admin-ws" package="org.beangle.sashub.web.ws">
     <action suffix="WS" defaultMethod="index" />
     <url path="/" suffix="" style="plur-seo" />
     <interceptors>

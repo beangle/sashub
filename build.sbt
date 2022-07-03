@@ -1,13 +1,13 @@
 import org.beangle.parent.Settings._
 import SasDepends._
 
-ThisBuild / organization := "org.beangle.sasadmin"
+ThisBuild / organization := "org.beangle.sashub"
 ThisBuild / version := "0.0.1-SNAPSHOT"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
-    url("https://github.com/beangle/sasadmin"),
-    "scm:git@github.com:beangle/ems.git"
+    url("https://github.com/beangle/sashub"),
+    "scm:git@github.com:beangle/sashub.git"
   )
 )
 
@@ -21,7 +21,7 @@ ThisBuild / developers := List(
 )
 
 ThisBuild / description := "The Beangle Sas Admin"
-ThisBuild / homepage := Some(url("http://beangle.github.io/sasadmin/index.html"))
+ThisBuild / homepage := Some(url("http://beangle.github.io/sashub/index.html"))
 ThisBuild / resolvers += Resolver.mavenLocal
 
 lazy val root = (project in file("."))
@@ -31,7 +31,7 @@ lazy val root = (project in file("."))
 lazy val webapp = (project in file("webapp"))
   .enablePlugins(WarPlugin,UndertowPlugin)
   .settings(
-    name := "beangle-sasadmin-webapp",
+    name := "beangle-sashub-webapp",
     common,
     crossPaths := false,
     libraryDependencies ++= appDepends

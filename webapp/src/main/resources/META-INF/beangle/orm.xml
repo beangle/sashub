@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <orm>
-  <mapping class="org.beangle.sasadmin.model.config.DefaultMapping"/>
+  <mapping class="org.beangle.sashub.model.config.DefaultMapping"/>
   <naming>
-    <profile package = "org.beangle.sasadmin.model" pluralize="true" schema="sas"/>
+    <profile package = "org.beangle.sashub.model" pluralize="true" schema="sas"/>
   </naming>
 </orm>
