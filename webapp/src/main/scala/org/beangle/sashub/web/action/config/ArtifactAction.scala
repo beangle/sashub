@@ -17,11 +17,11 @@
 
 package org.beangle.sashub.web.action.config
 
-import org.beangle.sashub.model.config.{Artifact, Profile, Webapp}
-import org.beangle.sashub.service.ProfileService
-import org.beangle.web.action.annotation.mapping
-import org.beangle.web.action.view.View
-import org.beangle.webmvc.support.action.RestfulAction
+import _root_.org.beangle.sashub.model.config.{Artifact, Profile, Webapp}
+import _root_.org.beangle.sashub.service.ProfileService
+import _root_.org.beangle.web.action.annotation.mapping
+import _root_.org.beangle.web.action.view.View
+import _root_.org.beangle.webmvc.support.action.RestfulAction
 
 class ArtifactAction extends RestfulAction[Artifact] {
 
@@ -36,8 +36,7 @@ class ArtifactAction extends RestfulAction[Artifact] {
 
   override protected def editSetting(artifact: Artifact): Unit = {
     if (!artifact.persisted) artifact.resolveSupport = true
-    put("profiles",profileService.getAll())
+    put("profiles", profileService.getAll())
     super.editSetting(artifact)
   }
-
 }

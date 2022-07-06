@@ -17,12 +17,13 @@
 
 package org.beangle.sashub.service
 
-import org.beangle.cdi.bind.BindModule
-import org.beangle.sashub.service.impl.DefaultProfileService
+import _root_.org.beangle.cdi.bind.BindModule
+import _root_.org.beangle.sashub.service.impl.{DefaultProfileService, MenuServiceImpl}
 
 class DefaultModule extends BindModule {
 
   protected override def binding(): Unit = {
     bind(classOf[DefaultProfileService])
+    bind(classOf[MenuServiceImpl])
   }
 }

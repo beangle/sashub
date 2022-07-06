@@ -17,8 +17,8 @@
 
 package org.beangle.sashub.model.config
 
-import org.beangle.data.model.IntId
-import org.beangle.data.model.pojo.{Coded, Named}
+import _root_.org.beangle.data.model.IntId
+import _root_.org.beangle.data.model.pojo.{Coded, Named}
 
 class Organization extends IntId with Named {
 

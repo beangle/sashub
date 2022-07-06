@@ -17,7 +17,7 @@
 
 package org.beangle.sashub.model.config
 
-import org.beangle.data.model.LongId
+import _root_.org.beangle.data.model.LongId
 
 /** 组件
  */

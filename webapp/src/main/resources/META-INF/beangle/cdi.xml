@@ -3,6 +3,7 @@
   <container>
     <module class="org.beangle.sashub.web.action.DefaultModule"/>
     <module class="org.beangle.sashub.web.action.config.DefaultModule"/>
+    <module class="org.beangle.sashub.web.action.ems.DefaultModule"/>
     <module class="org.beangle.sashub.web.ws.DefaultModule"/>
     <module class="org.beangle.sashub.web.DaoModule"/>
     <module class="org.beangle.sashub.service.DefaultModule"/>

@@ -17,8 +17,8 @@
 
 package org.beangle.sashub.web.action.config
 
-import org.beangle.sashub.model.config.{Farm, Host, Profile, Server}
-import org.beangle.webmvc.support.action.RestfulAction
+import _root_.org.beangle.sashub.model.config.{Farm, Host, Profile, Server}
+import _root_.org.beangle.webmvc.support.action.RestfulAction
 
 class ServerAction extends RestfulAction[Server] {
   override protected def editSetting(entity: Server): Unit = {

@@ -17,11 +17,11 @@
 
 package org.beangle.sashub.web.action.helper
 
-import org.beangle.commons.lang.Strings
-import org.beangle.data.dao.EntityDao
-import org.beangle.sashub.model.config.Profile
-import org.beangle.web.action.context.{ActionContext, Params}
-import org.beangle.web.servlet.util.CookieUtils
+import _root_.org.beangle.commons.lang.Strings
+import _root_.org.beangle.data.dao.EntityDao
+import _root_.org.beangle.sashub.model.config.Profile
+import _root_.org.beangle.web.action.context.{ActionContext, Params}
+import _root_.org.beangle.web.servlet.util.CookieUtils
 
 object ProfileHelper {
 

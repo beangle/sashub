@@ -17,8 +17,8 @@
 
 package org.beangle.sashub.model.config
 
-import org.beangle.data.model.LongId
-import org.beangle.data.model.pojo.Named
+import _root_.org.beangle.data.model.LongId
+import _root_.org.beangle.data.model.pojo.Named
 
 class Host extends LongId with Named {
 

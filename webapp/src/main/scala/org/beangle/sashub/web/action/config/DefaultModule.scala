@@ -17,7 +17,7 @@
 
 package org.beangle.sashub.web.action.config
 
-import org.beangle.cdi.bind.BindModule
+import _root_.org.beangle.cdi.bind.BindModule
 
 class DefaultModule extends BindModule {
 
@@ -30,6 +30,7 @@ class DefaultModule extends BindModule {
     bind(classOf[HostAction])
     bind(classOf[ArtifactAction])
     bind(classOf[WebappAction])
+    println("xxxxx")
   }
 
 }

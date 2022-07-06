@@ -15,4 +15,12 @@
       <interceptor name="web.Interceptor.hibernate" />
     </interceptors>
   </profile>
+
+  <profile name="sas-api-ws" package="org.beangle.sashub.web.ws.api">
+    <action suffix="WS" defaultMethod="index" />
+    <url path="/api/{profile}/" suffix="" style="plur-seo" />
+    <interceptors>
+      <interceptor name="web.Interceptor.hibernate" />
+    </interceptors>
+  </profile>
 </mvc>

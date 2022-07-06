@@ -1,4 +1,4 @@
-import org.beangle.parent.Settings._
+import _root_.org.beangle.parent.Settings._
 import SasDepends._
 
 ThisBuild / organization := "org.beangle.sashub"
@@ -29,7 +29,7 @@ lazy val root = (project in file("."))
   .aggregate(webapp)
 
 lazy val webapp = (project in file("webapp"))
-  .enablePlugins(WarPlugin,UndertowPlugin)
+  .enablePlugins(WarPlugin,TomcatPlugin)
   .settings(
     name := "beangle-sashub-webapp",
     common,

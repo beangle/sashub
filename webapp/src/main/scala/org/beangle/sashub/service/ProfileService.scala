@@ -17,7 +17,7 @@
 
 package org.beangle.sashub.service
 
-import org.beangle.sashub.model.config.Profile
+import _root_.org.beangle.sashub.model.config.Profile
 
 trait ProfileService {
 

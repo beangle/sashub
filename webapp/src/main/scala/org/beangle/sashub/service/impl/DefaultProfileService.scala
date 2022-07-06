@@ -17,9 +17,9 @@
 
 package org.beangle.sashub.service.impl
 
-import org.beangle.data.dao.{EntityDao, OqlBuilder}
-import org.beangle.sashub.model.config.{Organization, Profile}
-import org.beangle.sashub.service.ProfileService
+import _root_.org.beangle.data.dao.{EntityDao, OqlBuilder}
+import _root_.org.beangle.sashub.model.config.{Organization, Profile}
+import _root_.org.beangle.sashub.service.ProfileService
 
 class DefaultProfileService extends ProfileService {
   var entityDao: EntityDao = _

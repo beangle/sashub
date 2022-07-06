@@ -17,7 +17,7 @@
 
 package org.beangle.sashub.model.config
 
-import org.beangle.data.orm.MappingModule
+import _root_.org.beangle.data.orm.MappingModule
 
 class DefaultMapping extends MappingModule {
   override def binding(): Unit = {
