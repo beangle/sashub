@@ -24,11 +24,11 @@ import _root_.org.beangle.webmvc.support.action.RestfulAction
 class AppAction extends RestfulAction[App] {
 
   override protected def indexSetting(): Unit = {
-    put("domains", entityDao.getAll(classOf[AppGroup]))
+    put("groups", entityDao.getAll(classOf[AppGroup]))
   }
 
   override protected def editSetting(entity: App): Unit = {
-    put("domains", entityDao.getAll(classOf[AppGroup]))
+    put("groups", entityDao.getAll(classOf[AppGroup]))
     super.editSetting(entity)
   }
 }

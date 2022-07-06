@@ -20,6 +20,6 @@ package org.beangle.sashub.web.action.ems
 import org.beangle.sashub.model.ems.AppGroup
 import org.beangle.webmvc.support.action.RestfulAction
 
-class DomainAction extends RestfulAction[AppGroup] {
+class AppGroupAction extends RestfulAction[AppGroup] {
 
 }
