@@ -45,6 +45,7 @@ class ScriptWS extends ActionSupport with ParamSupport with ServletSupport {
           case Some(h) =>
             val features = dependencySort(h.features)
             val scripts = features.map(f => f.scripts.find(s => s.platform == h.platform)).flatten
+            put("platform",h.platform)
             put("scripts", scripts)
             forward()
         }
@@ -65,7 +66,7 @@ class ScriptWS extends ActionSupport with ParamSupport with ServletSupport {
 
   private def cascadeUpdatePriority(feature: PlatformFeature, priorities: mutable.Map[PlatformFeature, Int], maxValue: Int): Unit = {
     feature.dependencies foreach { dependency =>
-      val oldValue = priorities(dependency)
+      val oldValue = priorities.getOrElseUpdate(dependency,1)
       if oldValue < maxValue then
         priorities.update(dependency, oldValue + 1)
         cascadeUpdatePriority(dependency, priorities, maxValue)

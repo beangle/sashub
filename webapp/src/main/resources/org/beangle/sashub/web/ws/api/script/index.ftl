@@ -6,6 +6,15 @@ if [ "$(id -u)" == "0" ]; then
   exit 1
 fi
 
+if [[ ! "$(id)" == *"(wheel)"*  ]]; then
+  echo "当前用户不是sudoer,请使用root进行添加."
+  [#assign platform_name=platform.name?lower_case/]
+  [#if platform_name?contains("fedora") || platform_name?contains("centos")]
+  me="$(whoami)"
+  echo "Using:usermod -aG wheel $me"
+  [/#if]
+fi
+
 [#list scripts as script]
 ${script.scripts?replace('#!/bin/sh',"echo '正在检查${script.feature.name}....'")}
 [/#list]
