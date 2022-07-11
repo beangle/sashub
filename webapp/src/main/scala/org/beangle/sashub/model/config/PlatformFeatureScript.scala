@@ -17,30 +17,19 @@
 
 package org.beangle.sashub.model.config
 
-import _root_.org.beangle.data.orm.MappingModule
+import org.beangle.data.model.LongId
 
-class DefaultMapping extends MappingModule {
-  override def binding(): Unit = {
-    bind[Organization]
-    bind[Profile]
-    bind[Engine]
-    bind[Host].declare { e =>
-      e.cpu is length(200)
-    }
-    bind[Farm].declare { e =>
-      e.servers is depends("farm")
-    }
-    bind[Server]
-    bind[Artifact]
-    bind[Webapp]
-    bind[Platform]
-    bind[PlatformFeature] declare { e =>
-      e.scripts is depends("feature")
-      e.dependencies is joinColumn("from_feature_id")
-    }
+/**
+ * 操作系统功能的检查和安装脚本
+ */
+class PlatformFeatureScript extends LongId {
 
-    bind[PlatformFeatureScript] declare { e =>
-      e.scripts is length(4000)
-    }
-  }
+  var feature: PlatformFeature = _
+
+  /** 软件平台(os) */
+  var platform: Platform = _
+
+  /** 相应的脚本 */
+  var scripts: String = _
+
 }

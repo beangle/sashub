@@ -8,7 +8,7 @@
   [/@]
   [@b.row]
     [@b.boxcol /]
-    [@b.col property="name" title="名称" width="8%"][@b.a href="!info?id=${farm.id}"]${farm.name!}[/@][/@]
+    [@b.col property="name" title="名称" width="8%"]${farm.name!}[/@]
     [@b.col property="engine.name" title="引擎" width="12%"/]
     [@b.col property="maxHeapSize" title="堆上限" width="8%"]<span title="${farm.opts!}">${farm.maxHeapSize!}MB</span>[/@]
     [@b.col property="http.maxThreads" title="最大线程" width="8%"/]

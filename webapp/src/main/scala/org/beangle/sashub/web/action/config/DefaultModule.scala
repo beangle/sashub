@@ -30,7 +30,9 @@ class DefaultModule extends BindModule {
     bind(classOf[HostAction])
     bind(classOf[ArtifactAction])
     bind(classOf[WebappAction])
-    println("xxxxx")
+    bind(classOf[PlatformAction])
+    bind(classOf[PlatformFeatureAction])
+    println("xxxxxy123")
   }
 
 }

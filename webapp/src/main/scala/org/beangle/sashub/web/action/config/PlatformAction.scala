@@ -15,32 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.sashub.model.config
+package org.beangle.sashub.web.action.config
 
-import _root_.org.beangle.data.orm.MappingModule
+import _root_.org.beangle.sashub.model.config.Platform
+import _root_.org.beangle.webmvc.support.action.RestfulAction
 
-class DefaultMapping extends MappingModule {
-  override def binding(): Unit = {
-    bind[Organization]
-    bind[Profile]
-    bind[Engine]
-    bind[Host].declare { e =>
-      e.cpu is length(200)
-    }
-    bind[Farm].declare { e =>
-      e.servers is depends("farm")
-    }
-    bind[Server]
-    bind[Artifact]
-    bind[Webapp]
-    bind[Platform]
-    bind[PlatformFeature] declare { e =>
-      e.scripts is depends("feature")
-      e.dependencies is joinColumn("from_feature_id")
-    }
+class PlatformAction extends RestfulAction[Platform] {
 
-    bind[PlatformFeatureScript] declare { e =>
-      e.scripts is length(4000)
-    }
-  }
 }

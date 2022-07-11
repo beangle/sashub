@@ -19,6 +19,9 @@ package org.beangle.sashub.model.config
 
 import _root_.org.beangle.data.model.LongId
 import _root_.org.beangle.data.model.pojo.Named
+import org.beangle.commons.collection.Collections
+
+import scala.collection.mutable
 
 class Host extends LongId with Named {
 
@@ -29,14 +32,20 @@ class Host extends LongId with Named {
   /** 内存多少兆 */
   var memory: Int = _
 
-  /** 操作系统 */
-  var os: String = _
+  /** 软件平台(os) */
+  var platform: Platform = _
+
+  /** 操作系统版本 */
+  var platformVersion: String = _
 
   /** CPU核心数 */
   var cores: Int = _
 
   /** CPU描述 */
   var cpu: String = _
+
+  /** 操作系统特性 */
+  var features: mutable.Buffer[PlatformFeature] = Collections.newBuffer[PlatformFeature]
 
   def title: String = s"$name $ip"
 }

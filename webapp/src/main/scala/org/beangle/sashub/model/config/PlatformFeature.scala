@@ -17,30 +17,25 @@
 
 package org.beangle.sashub.model.config
 
-import _root_.org.beangle.data.orm.MappingModule
+import org.beangle.commons.collection.Collections
+import org.beangle.data.model.LongId
+import org.beangle.data.model.pojo.Named
 
-class DefaultMapping extends MappingModule {
-  override def binding(): Unit = {
-    bind[Organization]
-    bind[Profile]
-    bind[Engine]
-    bind[Host].declare { e =>
-      e.cpu is length(200)
-    }
-    bind[Farm].declare { e =>
-      e.servers is depends("farm")
-    }
-    bind[Server]
-    bind[Artifact]
-    bind[Webapp]
-    bind[Platform]
-    bind[PlatformFeature] declare { e =>
-      e.scripts is depends("feature")
-      e.dependencies is joinColumn("from_feature_id")
-    }
+import scala.collection.mutable
 
-    bind[PlatformFeatureScript] declare { e =>
-      e.scripts is length(4000)
-    }
+class PlatformFeature extends LongId with Named {
+
+  var scripts: mutable.Buffer[PlatformFeatureScript] = Collections.newBuffer[PlatformFeatureScript]
+
+  var logo: String = _
+
+  var version: String = _
+
+  var description: String = _
+
+  var dependencies: mutable.Buffer[PlatformFeature] = Collections.newBuffer
+
+  def support(platform: Platform): Boolean = {
+    scripts.exists(_.platform == platform)
   }
 }

@@ -26,6 +26,7 @@ class DefaultModule extends BindModule {
     bind(classOf[ProfileWS])
     bind(classOf[api.MenuWS])
     bind(classOf[api.ProfileWS])
+    bind(classOf[api.ScriptWS])
   }
 
 }
