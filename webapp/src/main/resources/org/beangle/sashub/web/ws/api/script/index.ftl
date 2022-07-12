@@ -12,6 +12,7 @@ if [[ ! "$(id)" == *"(wheel)"*  ]]; then
   [#if platform_name?contains("fedora") || platform_name?contains("centos")]
   me="$(whoami)"
   echo "Using:usermod -aG wheel $me"
+  exit 1
   [/#if]
 fi
 

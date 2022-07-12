@@ -20,6 +20,7 @@ package org.beangle.sashub.web.action.config
 import _root_.org.beangle.sashub.model.config.{Platform, PlatformFeature, PlatformFeatureScript}
 import _root_.org.beangle.web.action.view.View
 import _root_.org.beangle.webmvc.support.action.RestfulAction
+import _root_.org.beangle.commons.lang.Strings
 
 class PlatformFeatureAction extends RestfulAction[PlatformFeature] {
 
@@ -48,7 +49,7 @@ class PlatformFeatureAction extends RestfulAction[PlatformFeature] {
 
   def saveScript(): View = {
     val script = populateEntity(classOf[PlatformFeatureScript], "script")
-    script.scripts = script.scripts.trim()
+    script.scripts = Strings.replace(script.scripts.trim(), "\r", "")
     entityDao.saveOrUpdate(script)
     redirect("info", "id=" + script.feature.id, "info.save.success")
   }
