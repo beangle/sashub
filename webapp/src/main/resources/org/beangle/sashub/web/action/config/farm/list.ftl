@@ -12,7 +12,7 @@
     [@b.col property="engine.name" title="引擎" width="12%"/]
     [@b.col property="maxHeapSize" title="堆上限" width="8%"]<span title="${farm.opts!}">${farm.maxHeapSize!}MB</span>[/@]
     [@b.col property="http.maxThreads" title="最大线程" width="8%"/]
-    [@b.col title="服务" width="52%"][#list farm.servers?sort_by('name') as s]${s.host.name}:${s.httpPort}[#sep]&nbsp;[/#list][/@]
+    [@b.col title="服务" ][#list farm.servers?sort_by('name') as s] ${s.name}<span class="text-muted" style="font-size:0.8em">(${s.host.name}:${s.httpPort})</span>[#sep]&nbsp;[/#list][/@]
     [@b.col title="操作" width="7%"][@b.a href="server!search?server.farm.id="+farm.id target="_blank"]维护[/@][/@]
   [/@]
 [/@]

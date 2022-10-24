@@ -17,38 +17,9 @@
 
 package org.beangle.sashub.model.config
 
-import _root_.org.beangle.data.model.LongId
-import _root_.org.beangle.data.model.pojo.Named
-import org.beangle.commons.collection.Collections
+enum Arch {
 
-import scala.collection.mutable
+  case Noarch, X86_64, AArch64
 
-class Host extends LongId with Named {
-
-  var profile: Profile = _
-
-  var ip: String = _
-
-  /** 内存多少兆 */
-  var memory: Int = _
-
-  /** 软件平台(os) */
-  var platform: Platform = _
-
-  /** 操作系统版本 */
-  var platformVersion: String = _
-
-  /** CPU核心数 */
-  var cores: Int = _
-
-  /** CPU描述 */
-  var cpu: String = _
-
-  /** 操作系统特性 */
-  var features: mutable.Buffer[PlatformFeature] = Collections.newBuffer[PlatformFeature]
-
-  /** 体系结构 */
-  var arch: Arch = Arch.Noarch
-
-  def title: String = s"$name $ip"
+  def id: Int = ordinal + 1
 }

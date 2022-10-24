@@ -34,6 +34,7 @@ class IndexAction extends ActionSupport with ServletSupport {
 
   def index(): View = {
     put("nav", NavContext.get(request))
+    put("locale",ActionContext.current.locale)
     forward()
   }
 

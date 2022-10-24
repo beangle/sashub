@@ -33,6 +33,8 @@ class Artifact extends LongId {
   var jspSupport: Boolean = false
   var websocketSupport: Boolean = false
   var profile: Option[Profile] = None
+  /** 体系结构 */
+  var arch: Arch = Arch.Noarch
   /** 推荐上下文设置
    */
   var contextPath: String = _

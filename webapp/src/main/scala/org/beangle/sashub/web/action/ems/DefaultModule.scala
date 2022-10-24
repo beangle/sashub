@@ -26,7 +26,6 @@ class DefaultModule extends BindModule {
     bind(classOf[MenuAction])
     bind(classOf[ResourceAction])
     bind(classOf[AppGroupAction])
-    println("xxxxxyxx")
   }
 
 }

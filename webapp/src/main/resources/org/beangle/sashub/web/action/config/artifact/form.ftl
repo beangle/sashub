@@ -7,6 +7,7 @@
     [@b.textfield label="分组" name="artifact.groupId" value=artifact.groupId required="true" maxlength="100" comment="groupId"/]
     [@b.radios label="打包类型" name="artifact.packaging" value=artifact.packaging! required="true" items= packagings comment="packaging"/]
     [@b.textfield label="分类器" name="artifact.classifier" value=artifact.classifier! maxlength="100" comment="classifier"/]
+    [@b.select label="面向平台" name="artifact.arch" value=artifact.arch.id items={'1':'Noarch','2':'X86_64','3':'AArch64'} required="true"/]
     [@b.textfield label="最新版本" name="artifact.latestVersion" value=artifact.latestVersion required="true" maxlength="100" /]
     [@b.textfield label="默认上下文" name="artifact.contextPath" value=artifact.contextPath! required="true" maxlength="100"/]
 

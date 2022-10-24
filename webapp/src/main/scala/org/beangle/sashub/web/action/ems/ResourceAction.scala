@@ -31,7 +31,7 @@ class ResourceAction extends RestfulAction[Resource] {
   }
 
   override def info(id: String): View = {
-    val entity = getModel[Entity[_]](entityName, id)
+    val entity: Resource = getModel(id.toLong)
     val query = OqlBuilder.from(classOf[Menu], "menu")
     query.join("menu.resources", "r").where("r.id=:resourceId", entity.id)
       .orderBy("menu.app.id,menu.indexno")

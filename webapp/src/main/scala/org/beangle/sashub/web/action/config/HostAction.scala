@@ -48,8 +48,11 @@ class HostAction extends RestfulAction[Host] {
 
   override protected def saveAndRedirect(host: Host): View = {
     val dependencyIds = getAll("featureId", classOf[Long])
-    host.features.clear()
-    host.features ++= entityDao.find(classOf[PlatformFeature], dependencyIds)
+    val newFeatures = entityDao.find(classOf[PlatformFeature], dependencyIds);
+    val removed = host.features.filter(x => !newFeatures.contains(x))
+    val added = newFeatures.filter(x => !host.features.contains(x))
+    host.features.subtractAll(removed)
+    host.features.addAll(added)
     super.saveAndRedirect(host)
   }
 

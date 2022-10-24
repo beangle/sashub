@@ -4,6 +4,9 @@
   <div class="card card-info card-outline">
     <div class="card-header">
      <i class="fa-solid fa-server"></i>&nbsp;主机信息</span>
+        <div class="card-tools">
+           <a href="${b.base}/api/${host.profile.qualifiedName}/script/${host.ip}.sh" target="_blank" class="float-right">下载初始化脚本</a>
+         </div>
     </div>
     <div class="card-body" style="padding-top: 5px;">
      <table class="infoTable">

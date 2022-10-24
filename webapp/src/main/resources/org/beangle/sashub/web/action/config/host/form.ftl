@@ -8,6 +8,7 @@
   [@b.number label="内存" name="host.memory" value=host.memory! required="true" maxlength="10" comment="GB"/]
   [@b.textfield label="CPU规格" name="host.cpu" value=host.cpu! required="true" maxlength="100" style="width:300px;"  /]
   [@b.number label="CPU核心数" name="host.cores" value=host.cores!  required="true" maxlength="10"/]
+  [@b.select label="平台" name="host.arch" value=host.arch.id items={'1':'Noarch','2':'X86_64','3':'AArch64'} required="true"/]
   [@b.select label="操作系统" name="host.platform.id" items=platforms required="true" value=host.platform!/]
   [@b.textfield label="系统详细版本" name="host.platformVersion" value=host.platformVersion! required="true" maxlength="80"  /]
   [@b.select name="featureId" items=features required="false" label="系统特性" multiple="true" values=host.features  chosenMin="1" style="width:300px;" /]
@@ -16,4 +17,5 @@
     [@b.reset/] &nbsp;&nbsp;[@b.submit value="action.submit" /]
   [/@]
 [/@]
+[#list 1..10 as i]<br>[/#list]
 [@b.foot/]
