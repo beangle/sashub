@@ -85,7 +85,7 @@ class ProfileWS extends ActionSupport with ParamSupport with ServletSupport {
 
   private def prepareProxyData(profile: Profile): Unit = {
     val query = OqlBuilder.from(classOf[Webapp], "webapp")
-    query.where("webapp.profile=:profile and size(webapp.runAt) >0", profile)
+    query.where("webapp.profile=:profile and size(webapp.targets) >0", profile)
     val webappList = entityDao.search(query)
 
     val webapps = webappList.sortBy(w => w.contextPath).toBuffer
@@ -96,9 +96,9 @@ class ProfileWS extends ActionSupport with ParamSupport with ServletSupport {
     val backendServers = new mutable.HashMap[Farm, mutable.HashSet[Set[Server]]]
     val backendMapping = new mutable.HashMap[Set[Server], mutable.HashSet[Webapp]]
     webapps foreach { webapp =>
-      if webapp.runAt.nonEmpty then
-        val farm = webapp.runAt.head.farm
-        val servers = webapp.runAt.toSet
+      if webapp.targets.nonEmpty then
+        val farm = webapp.targets.head.farm
+        val servers = webapp.targets.toSet
         val farmBackends = backendServers.getOrElseUpdate(farm, new mutable.HashSet[Set[Server]])
         farmBackends.addOne(servers)
         backendMapping.getOrElseUpdate(servers, new mutable.HashSet[Webapp]).addOne(webapp)

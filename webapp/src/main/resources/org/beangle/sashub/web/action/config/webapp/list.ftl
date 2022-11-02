@@ -18,7 +18,7 @@
     [/@]
     [@b.col property="contextPath" title="上下文" width="14%" style="text-align:left;padding-left:10px"/]
     [@b.col title="运行在" width="35%"]
-       [#list webapp.runAt as s]${s.farm.name}.${s.name}<span style="font-size:0.8rem;color: #999;">${s.host.name}:${s.httpPort}</span>[#if s_index %2==1]<br>[#else]&nbsp;[/#if][/#list]
+       [#list webapp.targets as s]${s.farm.name}.${s.name}<span style="font-size:0.8rem;color: #999;">${s.host.name}:${s.httpPort}</span>[#if s_index %2==1]<br>[#else]&nbsp;[/#if][/#list]
     [/@]
     [@b.col property="unpack" title="解压执行" width="8%"/]
   [/@]

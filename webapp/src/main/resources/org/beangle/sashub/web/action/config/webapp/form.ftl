@@ -8,7 +8,7 @@
   [@b.textfield label="版本" name="webapp.version" value=webapp.version! required="true" maxlength="100" /]
   [@b.textfield label="上下文" name="webapp.contextPath" value=webapp.contextPath! required="true" maxlength="100"/]
   [@b.radios label="解压执行" name="webapp.unpack" value=webapp.unpack!/]
-  [@b.select label="运行在" name="server.id" items=servers required="true" values=webapp.runAt! multiple="true"
+  [@b.select label="运行在" name="server.id" items=servers required="true" values=webapp.targets! multiple="true"
              option=r"${item.farm.name}.${item.name}(${item.host.name}:${item.httpPort})" chosenMin="1" style="width:500px"/]
   [@b.formfoot]
     <input type="hidden" value="${profile.id}" name="webapp.profile.id"/>

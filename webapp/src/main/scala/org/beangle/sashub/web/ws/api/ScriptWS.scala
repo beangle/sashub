@@ -37,20 +37,32 @@ class ScriptWS extends ActionSupport with ParamSupport with ServletSupport {
   def index(@param("profile") name: String, @param("host") host: String): View = {
     getProfile(name) match {
       case Some(profile) =>
+        println(profile)
         val query = OqlBuilder.from(classOf[Host], "host")
         query.where("host.profile=:profile", profile)
-        query.where("host.ip=:host",host)
+        query.where("host.ip=:host", host)
         entityDao.search(query).headOption match {
           case None => Status.NotFound
           case Some(h) =>
-            val features = dependencySort(h.features)
+            val allfeatures = Collections.newSet[PlatformFeature]
+            h.features.foreach(f => collectFeatures(f, allfeatures))
+            val features = dependencySort(allfeatures)
             val scripts = features.map(f => f.scripts.find(s => s.platform == h.platform)).flatten
-            put("platform",h.platform)
+            put("platform", h.platform)
             put("scripts", scripts)
             forward()
         }
       case None => Status.NotFound
     }
+  }
+
+  private def collectFeatures(feature: PlatformFeature, results: mutable.Set[PlatformFeature]): Unit = {
+    if !results.contains(feature) then
+      results += feature
+      feature.dependencies foreach { f =>
+        collectFeatures(f, results)
+      }
+    end if
   }
 
   private def dependencySort(features: Iterable[PlatformFeature]): List[PlatformFeature] = {
@@ -66,7 +78,7 @@ class ScriptWS extends ActionSupport with ParamSupport with ServletSupport {
 
   private def cascadeUpdatePriority(feature: PlatformFeature, priorities: mutable.Map[PlatformFeature, Int], maxValue: Int): Unit = {
     feature.dependencies foreach { dependency =>
-      val oldValue = priorities.getOrElseUpdate(dependency,1)
+      val oldValue = priorities.getOrElseUpdate(dependency, 1)
       if oldValue < maxValue then
         priorities.update(dependency, oldValue + 1)
         cascadeUpdatePriority(dependency, priorities, maxValue)

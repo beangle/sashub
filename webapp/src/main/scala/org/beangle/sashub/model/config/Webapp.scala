@@ -28,7 +28,7 @@ class Webapp extends LongId {
   var version: String = _
 
   var unpack: Boolean = false
-  var runAt: mutable.Buffer[Server] = new mutable.ArrayBuffer[Server]
+  var targets: mutable.Buffer[Server] = new mutable.ArrayBuffer[Server]
   var contextPath: String = _
 
   def gav: String = {

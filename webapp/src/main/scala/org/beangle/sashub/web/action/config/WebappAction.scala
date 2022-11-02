@@ -67,8 +67,8 @@ class WebappAction extends RestfulAction[Webapp] {
   override protected def saveAndRedirect(webapp: Webapp): View = {
     val profile = entityDao.get(classOf[Profile], longId("webapp.profile"))
     webapp.profile = profile
-    webapp.runAt.clear()
-    webapp.runAt ++= entityDao.find(classOf[Server], getAll("server.id", classOf[Long]))
+    webapp.targets.clear()
+    webapp.targets ++= entityDao.find(classOf[Server], getAll("server.id", classOf[Long]))
     super.saveAndRedirect(webapp)
   }
 }

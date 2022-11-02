@@ -18,7 +18,7 @@
     <tbody>
    [#list platformFeature.scripts as script]
      <tr>
-       <td style="width: 10%;"><div><i class="${script.platform.fonticon}"></i> ${script.platform.name}</div>
+       <td style="width:150px;"><div><i class="${script.platform.fonticon}"></i> ${script.platform.name}</div>
            <div>
               [@b.a onclick="removeScript('${platformFeature.id}','${script.id}');return false;" class="btn btn-sm btn-warning"]<i class="fa fa-xmark"></i>删除[/@]
               [@b.a onclick="editScript('${platformFeature.id}','${script.id}');return false;" class="btn btn-sm btn-primary"]<i class="fa fa-edit"></i>修改[/@]

@@ -8,7 +8,7 @@
   [/@]
   [@b.row]
     [@b.boxcol /]
-    [@b.col property="name" title="名称" width="8%"][@b.a href="!info?id=${server.id}"]${server.name!}[/@][/@]
+    [@b.col property="name" title="名称" ][@b.a href="!info?id=${server.id}"]${server.name!}[/@][/@]
     [@b.col property="host.name" title="主机" width="8%"]${server.host.name}[/@]
     [@b.col property="httpPort" title="http端口" width="8%"/]
     [@b.col property="maxHeapSize" title="堆上限" width="8%"]<span title="${server.opts!}">[#if server.maxHeapSize=0]--[#else]${server.maxHeapSize!}MB[/#if]</span>[/@]

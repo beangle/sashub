@@ -60,7 +60,7 @@ class HostAction extends RestfulAction[Host] {
   override def info(id: String): View = {
     val host = entityDao.get(classOf[Host], id.toLong)
     val query = OqlBuilder.from(classOf[Webapp], "webapp")
-    query.join("webapp.runAt", "server")
+    query.join("webapp.targets", "server")
     query.where("server.host=:host", host)
     query.select("distinct webapp")
     put("webapps", entityDao.search(query))

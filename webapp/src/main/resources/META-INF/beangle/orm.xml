@@ -3,7 +3,9 @@
   <mapping class="org.beangle.sashub.model.config.DefaultMapping"/>
   <mapping class="org.beangle.sashub.model.ems.DefaultMapping"/>
   <naming>
-    <profile package = "org.beangle.sashub.model.config" pluralize="true" schema="cfg"/>
-    <profile package = "org.beangle.sashub.model.ems" pluralize="true" schema="ems"/>
+    <profile package="org.beangle.sashub.model" pluralize="true" schema="sas">
+      <profile package="config"  prefix="cfg_"/>
+      <profile package="ems" prefix="ems_"/>
+    </profile>
   </naming>
 </orm>
