@@ -15,6 +15,8 @@
   [@b.radios label="启用Https" name="profile.enableHttps" value=profile.enableHttps /]
   [@b.radios label="强制Https" name="profile.forceHttps" value=profile.forceHttps /]
   [@b.number label="https端口" name="profile.httpsPort" value=profile.httpsPort maxlength="5" max="90000"/]
+  [@b.textfield label="SSL加密套件" name="profile.sslCiphers" value=profile.sslCiphers! maxlength="100"/]
+  [@b.textfield label="SSL协议" name="profile.sslProtocols" value=profile.sslProtocols! maxlength="100" /]
 
   [@b.textfield label="本地仓库" name="profile.localRepo" value=profile.localRepo required="true" maxlength="100" comment="默认为~/.m2/repository"/]
   [@b.textfield label="远程仓库" name="profile.remoteRepo" value=profile.remoteRepo style="width:400px;" required="true" maxlength="300"/]

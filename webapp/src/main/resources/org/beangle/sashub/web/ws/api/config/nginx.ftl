@@ -64,8 +64,8 @@ http {
         [#if profile.enableHttps && profile.hostname??]
         ssl_certificate /etc/nginx/${profile.hostname}.crt;
         ssl_certificate_key /etc/nginx/${profile.hostname}.key;
-        ssl_protocols      TLSv1 TLSv1.1 TLSv1.2;
-        ssl_ciphers       HIGH:!aNULL:!MD5;
+        ssl_protocols      ${profile.sslProtocols!"TLSv1 TLSv1.1 TLSv1.2"};
+        ssl_ciphers       ${profile.sslCiphers!"HIGH:!aNULL:!MD5"};
         keepalive_timeout   70;
         [/#if]
         root         /usr/share/nginx/html;

@@ -27,7 +27,10 @@ import _root_.org.beangle.web.action.view.{Status, View}
 
 import scala.collection.mutable
 
-class ProfileWS extends ActionSupport with ParamSupport with ServletSupport {
+/**
+ * 获取配置信息
+ */
+class ConfigWS extends ActionSupport with ParamSupport with ServletSupport {
 
   var profileService: ProfileService = _
   var entityDao: EntityDao = _
@@ -65,20 +68,12 @@ class ProfileWS extends ActionSupport with ParamSupport with ServletSupport {
     }
   }
 
-  def haproxy(@param("profile") name: String): View = {
+  def proxy(@param("profile") name: String): View = {
     val profiles = getProfile(name)
     if (profiles.size != 1) return Status.NotFound
     val profile = profiles.head
     prepareProxyData(profile)
-    forward()
-  }
-
-  def nginx(@param("profile") name: String): View = {
-    val profiles = getProfile(name)
-    if (profiles.size != 1) return Status.NotFound
-    val profile = profiles.head
-    prepareProxyData(profile)
-    forward()
+    forward(profile.proxyEngine)
   }
 
   private def prepareProxyData(profile: Profile): Unit = {

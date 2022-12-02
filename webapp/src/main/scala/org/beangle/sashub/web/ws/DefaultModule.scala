@@ -23,9 +23,8 @@ import org.beangle.sashub.web.ws.api
 class DefaultModule extends BindModule {
 
   protected override def binding(): Unit = {
-    bind(classOf[ProfileWS])
     bind(classOf[api.MenuWS])
-    bind(classOf[api.ProfileWS])
+    bind(classOf[api.ConfigWS])
     bind(classOf[api.ScriptWS])
   }
 

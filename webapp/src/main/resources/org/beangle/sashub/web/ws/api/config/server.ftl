@@ -54,7 +54,7 @@
 
   <Proxy engine="${profile.proxyEngine}" [#if profile.hostname??]hostname="${profile.hostname}"[/#if] maxconn="${profile.maxconn}" [#if profile.httpPort!=80] httpPort="${profile.httpPort}"[/#if]>
     [#if profile.enableHttps]
-    <Https port="${profile.httpsPort}" forceHttps="${profile.forceHttps?c}"/>
+    <Https port="${profile.httpsPort}" [#if profile.sslCiphers??]ciphers="${profile.sslCiphers}"[/#if] [#if profile.sslProtocols??]protocols="${profile.sslProtocols}"[/#if] forceHttps="${profile.forceHttps?c}" />
     [/#if]
     <Status url="/status" auth="admin:ChangeItNow"/>
   </Proxy>

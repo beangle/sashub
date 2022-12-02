@@ -45,7 +45,7 @@ class Host extends LongId with Named {
   var cpu: String = _
 
   /** 操作系统特性 */
-  var features: mutable.Buffer[PlatformFeature] = Collections.newBuffer[PlatformFeature]
+  var features: mutable.Set[PlatformFeature] = Collections.newSet[PlatformFeature]
 
   /** 体系结构 */
   var arch: Arch = Arch.Noarch

@@ -46,6 +46,10 @@ class Profile extends LongId with Named {
 
   var httpsPort: Int = 443
 
+  var sslCiphers: Option[String] = None
+
+  var sslProtocols: Option[String] = None
+
   var forceHttps: Boolean = true
 
   def qualifiedName: String = {

@@ -38,7 +38,7 @@ defaults
 frontend main
     bind *:${profile.httpPort}
     [#if profile.enableHttps]
-    bind *:${profile.httpsPort} ssl crt /etc/haproxy/${profile.hostname}.pem no-sslv3 no-tlsv10
+    bind *:${profile.httpsPort} ssl crt /etc/haproxy/${profile.hostname}.pem [#if profile.sslCiphers??]ciphers ${profile.sslCiphers}[/#if] ${profile.sslProtocols!"no-sslv3 no-tlsv10"}
     http-request set-header X-Forwarded-Proto https if { ssl_fc }
     http-request set-header X-Forwarded-Port %[dst_port]
     [#if profile.forceHttps && profile.hostname??]
