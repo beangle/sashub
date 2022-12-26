@@ -11,7 +11,7 @@
     [@b.col property="name" title="名称" width="10%"]
         [@b.a href="!info?id=${profile.id}"]<span style="font-size:0.8rem;color: #999;">${profile.org.name}.</span>${profile.name!}[/@]
     [/@]
-    [@b.col property="title" title="说明"  width="21%"]${profile.org.shortTitle}${profile.title}[/@]
+    [@b.col property="title" title="说明" ]${profile.org.shortTitle}${profile.title}[/@]
     [@b.col property="sasVersion" title="版本"  width="8%"]${profile.sasVersion}[/@]
     [@b.col property="ip" title="IP"  width="13%"]${profile.ip!}[/@]
     [@b.col property="hostname" title="域名" width="16%"]${profile.hostname!}[/@]

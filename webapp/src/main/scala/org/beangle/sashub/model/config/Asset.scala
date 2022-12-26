@@ -17,37 +17,30 @@
 
 package org.beangle.sashub.model.config
 
-import _root_.org.beangle.data.orm.MappingModule
+import org.beangle.commons.collection.Collections
+import org.beangle.commons.lang.Strings
+import org.beangle.data.model.IntId
+import org.beangle.data.model.pojo.{Named, Remark}
 
-class DefaultMapping extends MappingModule {
-  override def binding(): Unit = {
-    bind[Organization]
-    bind[Profile]
-    bind[Engine]
-    bind[Host].declare { e =>
-      e.cpu is length(200)
-    }
-    bind[Farm].declare { e =>
-      e.servers is depends("farm")
-    }
-    bind[Server]
-    bind[Artifact]
-    bind[Webapp]
-    bind[Platform]
-    bind[PlatformFeature] declare { e =>
-      e.scripts is depends("feature")
-      e.dependencies is joinColumn("from_feature_id")
-    }
+import scala.collection.mutable
 
-    bind[PlatformFeatureScript] declare { e =>
-      e.scripts is length(4000)
-    }
+class Asset extends IntId, Named, Remark {
+  var group: AssetGroup = _
+  var base: String = _
+  var bundles: mutable.Buffer[AssetBundle] = Collections.newBuffer[AssetBundle]
 
-    bind[Asset].declare { e =>
-      e.bundles is depends("asset")
-    }
-    bind[AssetBundle]
+  @transient
+  def bundleUris: String = {
+    bundles.map(b => b.uri).mkString("\n")
+  }
 
-    bind[AssetGroup]
+  def bundleUris_=(str: String): Unit = {
+    val parts = Strings.split(str).toSet
+    val removed = bundles.filterNot(x => parts.contains(x.uri))
+    bundles --= removed
+    parts foreach { p =>
+      if !bundles.exists(_.uri == p) then
+        bundles.addOne(AssetBundle(this, p))
+    }
   }
 }

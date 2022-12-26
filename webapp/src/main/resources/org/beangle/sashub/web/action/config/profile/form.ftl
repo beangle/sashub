@@ -21,6 +21,7 @@
   [@b.textfield label="本地仓库" name="profile.localRepo" value=profile.localRepo required="true" maxlength="100" comment="默认为~/.m2/repository"/]
   [@b.textfield label="远程仓库" name="profile.remoteRepo" value=profile.remoteRepo style="width:400px;" required="true" maxlength="300"/]
 
+  [@b.select name="assetGroup.id" items=assetGroups chosenMin="1" label="静态组" values=profile.assetGroups! multiple="true"/]
   [@b.field label="样例仓库"]
     <div style="margin-left:100px">
     <span style="font-size:0.8rem;color: #999;">Maven官方:</span>https://repo1.maven.org/maven2<br>

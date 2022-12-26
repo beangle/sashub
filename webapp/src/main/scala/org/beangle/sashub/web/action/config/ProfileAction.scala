@@ -17,7 +17,7 @@
 
 package org.beangle.sashub.web.action.config
 
-import _root_.org.beangle.sashub.model.config.{Organization, Profile}
+import _root_.org.beangle.sashub.model.config.{AssetGroup, Organization, Profile}
 import _root_.org.beangle.web.action.view.View
 import _root_.org.beangle.webmvc.support.action.RestfulAction
 
@@ -25,6 +25,7 @@ class ProfileAction extends RestfulAction[Profile] {
 
   override protected def editSetting(entity: Profile): Unit = {
     put("orgs", entityDao.getAll(classOf[Organization]))
+    put("assetGroups", entityDao.getAll(classOf[AssetGroup]))
     if !entity.persisted then
       entity.localRepo = "~/.m2/repository"
       entity.remoteRepo = "https://maven.aliyun.com/nexus/content/groups/public"
@@ -33,4 +34,9 @@ class ProfileAction extends RestfulAction[Profile] {
     super.editSetting(entity)
   }
 
+  override protected def saveAndRedirect(profile: Profile): View = {
+    profile.assetGroups.clear()
+    profile.assetGroups ++= entityDao.find(classOf[AssetGroup], intIds("assetGroup"))
+    super.saveAndRedirect(profile)
+  }
 }

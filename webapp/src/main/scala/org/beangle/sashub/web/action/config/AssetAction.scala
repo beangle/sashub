@@ -17,23 +17,18 @@
 
 package org.beangle.sashub.web.action.config
 
-import _root_.org.beangle.cdi.bind.BindModule
+import _root_.org.beangle.sashub.model.config.{Asset, AssetGroup}
+import _root_.org.beangle.sashub.service.ProfileService
+import _root_.org.beangle.webmvc.support.action.RestfulAction
 
-class DefaultModule extends BindModule {
-
-  protected override def binding(): Unit = {
-    bind(classOf[OrgAction])
-    bind(classOf[ProfileAction])
-    bind(classOf[EngineAction])
-    bind(classOf[FarmAction])
-    bind(classOf[ServerAction])
-    bind(classOf[HostAction])
-    bind(classOf[ArtifactAction])
-    bind(classOf[WebappAction])
-    bind(classOf[PlatformAction])
-    bind(classOf[PlatformFeatureAction])
-    bind(classOf[AssetAction])
-    bind(classOf[AssetGroupAction])
+class AssetAction extends RestfulAction[Asset] {
+  override protected def indexSetting(): Unit = {
+    put("groups", entityDao.getAll(classOf[AssetGroup]))
+    super.indexSetting()
   }
 
+  override protected def editSetting(context: Asset): Unit = {
+    put("groups", entityDao.getAll(classOf[AssetGroup]))
+    super.editSetting(context)
+  }
 }

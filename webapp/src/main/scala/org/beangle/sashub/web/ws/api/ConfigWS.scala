@@ -123,4 +123,20 @@ class ConfigWS extends ActionSupport with ParamSupport with ServletSupport {
     put("entryPoints", entryPoints)
   }
 
+  def asset(@param("profile") name: String): View = {
+    val profiles = profileService.getProfile(name)
+    if (profiles.size != 1) return Status.NotFound
+
+    val profile = profiles.head
+    put("profile", profile)
+    if (profile.assetGroups.isEmpty) {
+      put("assets", List.empty[Asset])
+    } else {
+      val query = OqlBuilder.from(classOf[Asset], "asset")
+      query.where("asset.group in(:groups)", profiles.head.assetGroups)
+      query.orderBy("asset.base")
+      put("assets", entityDao.search(query))
+    }
+    forward()
+  }
 }
