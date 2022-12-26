@@ -17,7 +17,7 @@
 
 package org.beangle.sashub.web.action.ems
 
-import _root_.org.beangle.cdi.bind.BindModule
+import org.beangle.cdi.bind.BindModule
 
 class DefaultModule extends BindModule {
 

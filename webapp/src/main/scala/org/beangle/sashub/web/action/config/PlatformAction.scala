@@ -17,8 +17,8 @@
 
 package org.beangle.sashub.web.action.config
 
-import _root_.org.beangle.sashub.model.config.Platform
-import _root_.org.beangle.webmvc.support.action.RestfulAction
+import org.beangle.sashub.model.config.Platform
+import org.beangle.webmvc.support.action.RestfulAction
 
 class PlatformAction extends RestfulAction[Platform] {
 

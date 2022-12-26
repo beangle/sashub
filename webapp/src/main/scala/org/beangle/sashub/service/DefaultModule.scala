@@ -17,8 +17,8 @@
 
 package org.beangle.sashub.service
 
-import _root_.org.beangle.cdi.bind.BindModule
-import _root_.org.beangle.sashub.service.impl.{DefaultProfileService, MenuServiceImpl}
+import org.beangle.cdi.bind.BindModule
+import org.beangle.sashub.service.impl.{DefaultProfileService, MenuServiceImpl}
 
 class DefaultModule extends BindModule {
 

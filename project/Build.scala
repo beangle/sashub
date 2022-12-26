@@ -1,4 +1,4 @@
-import _root_.org.beangle.parent.Dependencies._
+import org.beangle.parent.Dependencies._
 import sbt._
 
 object SasDepends {

@@ -17,10 +17,10 @@
 
 package org.beangle.sashub.web.action.config
 
-import _root_.org.beangle.sashub.model.config.{Platform, PlatformFeature, PlatformFeatureScript}
-import _root_.org.beangle.web.action.view.View
-import _root_.org.beangle.webmvc.support.action.RestfulAction
-import _root_.org.beangle.commons.lang.Strings
+import org.beangle.sashub.model.config.{Platform, PlatformFeature, PlatformFeatureScript}
+import org.beangle.web.action.view.View
+import org.beangle.webmvc.support.action.RestfulAction
+import org.beangle.commons.lang.Strings
 
 class PlatformFeatureAction extends RestfulAction[PlatformFeature] {
 

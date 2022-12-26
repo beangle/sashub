@@ -17,14 +17,14 @@
 
 package org.beangle.sashub.web.action
 
-import _root_.org.beangle.ems.app.web.NavContext
-import _root_.org.beangle.security.Securities
-import _root_.org.beangle.security.realm.cas.{Cas, CasConfig}
-import _root_.org.beangle.security.session.cache.CacheSessionRepo
-import _root_.org.beangle.web.action.annotation.action
-import _root_.org.beangle.web.action.context.ActionContext
-import _root_.org.beangle.web.action.support.{ActionSupport, ServletSupport}
-import _root_.org.beangle.web.action.view.View
+import org.beangle.ems.app.web.NavContext
+import org.beangle.security.Securities
+import org.beangle.security.realm.cas.{Cas, CasConfig}
+import org.beangle.security.session.cache.CacheSessionRepo
+import org.beangle.web.action.annotation.action
+import org.beangle.web.action.context.ActionContext
+import org.beangle.web.action.support.{ActionSupport, ServletSupport}
+import org.beangle.web.action.view.View
 
 @action("")
 class IndexAction extends ActionSupport with ServletSupport {

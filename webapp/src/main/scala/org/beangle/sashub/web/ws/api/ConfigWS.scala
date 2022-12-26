@@ -17,13 +17,13 @@
 
 package org.beangle.sashub.web.ws.api
 
-import _root_.org.beangle.commons.lang.Strings
-import _root_.org.beangle.data.dao.{EntityDao, OqlBuilder}
-import _root_.org.beangle.sashub.model.config.*
-import _root_.org.beangle.sashub.service.ProfileService
-import _root_.org.beangle.web.action.annotation.{action, mapping, param}
-import _root_.org.beangle.web.action.support.{ActionSupport, ParamSupport, ServletSupport}
-import _root_.org.beangle.web.action.view.{Status, View}
+import org.beangle.commons.lang.Strings
+import org.beangle.data.dao.{EntityDao, OqlBuilder}
+import org.beangle.sashub.model.config.*
+import org.beangle.sashub.service.ProfileService
+import org.beangle.web.action.annotation.{action, mapping, param}
+import org.beangle.web.action.support.{ActionSupport, ParamSupport, ServletSupport}
+import org.beangle.web.action.view.{Status, View}
 
 import scala.collection.mutable
 

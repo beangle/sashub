@@ -17,12 +17,12 @@
 
 package org.beangle.sashub.web.action.config
 
-import _root_.org.beangle.cdi.bind.BindModule
+import org.beangle.cdi.bind.BindModule
 
 class DefaultModule extends BindModule {
 
   protected override def binding(): Unit = {
-    bind(classOf[OrgAction])
+    bind(classOf[OrganizationAction])
     bind(classOf[ProfileAction])
     bind(classOf[EngineAction])
     bind(classOf[FarmAction])

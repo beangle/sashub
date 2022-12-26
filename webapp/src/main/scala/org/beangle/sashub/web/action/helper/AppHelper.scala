@@ -17,7 +17,7 @@
 
 package org.beangle.sashub.web.action.helper
 
-import _root_.org.beangle.sashub.model.ems.App
+import org.beangle.sashub.model.ems.App
 import org.beangle.commons.lang.Numbers
 import org.beangle.data.dao.EntityDao
 import org.beangle.web.action.context.{ActionContext, Params}

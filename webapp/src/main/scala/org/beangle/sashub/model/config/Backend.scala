@@ -17,7 +17,7 @@
 
 package org.beangle.sashub.model.config
 
-import _root_.org.beangle.commons.collection.Collections
+import org.beangle.commons.collection.Collections
 
 import scala.collection.mutable
 

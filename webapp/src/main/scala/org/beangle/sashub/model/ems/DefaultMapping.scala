@@ -17,8 +17,8 @@
 
 package org.beangle.sashub.model.ems
 
-import _root_.org.beangle.data.orm.MappingModule
-import _root_.org.beangle.sashub.model.ems.{App, Menu, Resource}
+import org.beangle.data.orm.MappingModule
+import org.beangle.sashub.model.ems.{App, Menu, Resource}
 
 class DefaultMapping extends MappingModule {
   override def binding(): Unit = {

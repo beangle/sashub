@@ -17,8 +17,8 @@
 
 package org.beangle.sashub.model.ems
 
-import _root_.org.beangle.data.model.IntId
-import _root_.org.beangle.data.model.pojo.{Enabled, Hierarchical, Named, Remark}
+import org.beangle.data.model.IntId
+import org.beangle.data.model.pojo.{Enabled, Hierarchical, Named, Remark}
 
 import scala.collection.mutable
 

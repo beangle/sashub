@@ -17,9 +17,9 @@
 
 package org.beangle.sashub.model.config
 
-import _root_.org.beangle.data.model.IntId
-import _root_.org.beangle.data.model.pojo.{Named, Remark}
-import _root_.org.beangle.sashub.model.config.Engine.jee
+import org.beangle.data.model.IntId
+import org.beangle.data.model.pojo.{Named, Remark}
+import org.beangle.sashub.model.config.Engine.jee
 
 import scala.collection.mutable
 

@@ -17,8 +17,8 @@
 
 package org.beangle.sashub.model.config
 
-import _root_.org.beangle.data.model.pojo.Named
-import _root_.org.beangle.data.model.{Component, LongId}
+import org.beangle.data.model.pojo.Named
+import org.beangle.data.model.{Component, LongId}
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer

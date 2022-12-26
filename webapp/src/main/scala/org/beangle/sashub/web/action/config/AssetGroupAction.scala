@@ -17,9 +17,9 @@
 
 package org.beangle.sashub.web.action.config
 
-import _root_.org.beangle.sashub.model.config.AssetGroup
-import _root_.org.beangle.sashub.service.ProfileService
-import _root_.org.beangle.webmvc.support.action.RestfulAction
+import org.beangle.sashub.model.config.AssetGroup
+import org.beangle.sashub.service.ProfileService
+import org.beangle.webmvc.support.action.RestfulAction
 
 class AssetGroupAction extends RestfulAction[AssetGroup] {
 

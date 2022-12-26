@@ -1,4 +1,4 @@
-import _root_.org.beangle.parent.Settings._
+import org.beangle.parent.Settings._
 import SasDepends._
 
 ThisBuild / organization := "org.beangle.sashub"

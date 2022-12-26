@@ -17,9 +17,9 @@
 
 package org.beangle.sashub.model.ems
 
-import _root_.org.beangle.data.model.IntId
-import _root_.org.beangle.data.model.pojo.{Enabled, Named, Remark}
-import _root_.org.beangle.security.authz.{Resource, Scope}
+import org.beangle.data.model.IntId
+import org.beangle.data.model.pojo.{Enabled, Named, Remark}
+import org.beangle.security.authz.{Resource, Scope}
 
 class Resource extends IntId with Named with Enabled with Remark {
   var app: App = _

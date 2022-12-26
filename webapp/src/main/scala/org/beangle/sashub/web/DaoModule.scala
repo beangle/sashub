@@ -17,14 +17,14 @@
 
 package org.beangle.sashub.web
 
-import _root_.org.beangle.cdi.bind.BindModule
-import _root_.org.beangle.commons.lang.ClassLoaders
-import _root_.org.beangle.data.orm.hibernate.spring.{HibernateTransactionManager, LocalSessionFactoryBean}
-import _root_.org.beangle.data.orm.hibernate.{DomainFactory, HibernateEntityDao}
-import _root_.org.beangle.ems.app.datasource.AppDataSourceFactory
-import _root_.org.beangle.webmvc.support.hibernate.OpenSessionInViewInterceptor
-import _root_.org.springframework.beans.factory.config.PropertiesFactoryBean
-import _root_.org.springframework.transaction.interceptor.TransactionProxyFactoryBean
+import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.lang.ClassLoaders
+import org.beangle.data.orm.hibernate.spring.{HibernateTransactionManager, LocalSessionFactoryBean}
+import org.beangle.data.orm.hibernate.{DomainFactory, HibernateEntityDao}
+import org.beangle.ems.app.datasource.AppDataSourceFactory
+import org.beangle.webmvc.support.hibernate.OpenSessionInViewInterceptor
+import org.springframework.beans.factory.config.PropertiesFactoryBean
+import org.springframework.transaction.interceptor.TransactionProxyFactoryBean
 
 object DaoModule extends BindModule {
 

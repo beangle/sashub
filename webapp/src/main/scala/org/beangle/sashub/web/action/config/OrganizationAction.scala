@@ -17,12 +17,12 @@
 
 package org.beangle.sashub.web.action.config
 
-import _root_.org.beangle.sashub.model.config.{Organization, Profile}
-import _root_.org.beangle.web.action.annotation.ignore
-import _root_.org.beangle.web.action.view.View
-import _root_.org.beangle.webmvc.support.action.RestfulAction
+import org.beangle.sashub.model.config.{Organization, Profile}
+import org.beangle.web.action.annotation.ignore
+import org.beangle.web.action.view.View
+import org.beangle.webmvc.support.action.RestfulAction
 
-class OrgAction extends RestfulAction[Organization] {
+class OrganizationAction extends RestfulAction[Organization] {
 
   @ignore
   protected override def simpleEntityName: String = "org"
