@@ -15,26 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.sashub.web.action.config
+package org.beangle.sashub.model.micdn
 
-import org.beangle.cdi.bind.BindModule
-import org.beangle.sashub.web.action.micdn.{AssetAction, AssetGroupAction}
+import org.beangle.commons.collection.Collections
+import org.beangle.data.model.IntId
+import org.beangle.data.model.pojo.{Named, Remark}
+import org.beangle.sashub.model.config.Profile
 
-class DefaultModule extends BindModule {
+import scala.collection.mutable
 
-  protected override def binding(): Unit = {
-    bind(classOf[OrganizationAction])
-    bind(classOf[ProfileAction])
-    bind(classOf[EngineAction])
-    bind(classOf[FarmAction])
-    bind(classOf[ServerAction])
-    bind(classOf[HostAction])
-    bind(classOf[ArtifactAction])
-    bind(classOf[WebappAction])
-    bind(classOf[PlatformAction])
-    bind(classOf[PlatformFeatureAction])
-    bind(classOf[AssetAction])
-    bind(classOf[AssetGroupAction])
-  }
+class AssetGroup extends IntId, Named, Remark {
+
+  var profiles: mutable.Set[Profile] = Collections.newSet[Profile]
 
 }

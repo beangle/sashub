@@ -17,26 +17,43 @@
 
 package org.beangle.sashub.web.action.config
 
-import org.beangle.sashub.model.config.{AssetGroup, Organization, Profile}
+import org.beangle.commons.collection.Collections
+import org.beangle.data.dao.OqlBuilder
+import org.beangle.sashub.model.config.{Organization, Profile}
+import org.beangle.sashub.model.micdn.AssetGroup
 import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.action.RestfulAction
 
 class ProfileAction extends RestfulAction[Profile] {
 
-  override protected def editSetting(entity: Profile): Unit = {
+  override protected def editSetting(profile: Profile): Unit = {
     put("orgs", entityDao.getAll(classOf[Organization]))
     put("assetGroups", entityDao.getAll(classOf[AssetGroup]))
-    if !entity.persisted then
-      entity.localRepo = "~/.m2/repository"
-      entity.remoteRepo = "https://maven.aliyun.com/nexus/content/groups/public"
-      entity.enableHttps = false
-      entity.forceHttps = false
-    super.editSetting(entity)
+    put("profileAssetGroups", getProfileAssetGroups(profile))
+    if !profile.persisted then
+      profile.localRepo = "~/.m2/repository"
+      profile.remoteRepo = "https://maven.aliyun.com/nexus/content/groups/public"
+      profile.enableHttps = false
+      profile.forceHttps = false
+    super.editSetting(profile)
   }
 
   override protected def saveAndRedirect(profile: Profile): View = {
-    profile.assetGroups.clear()
-    profile.assetGroups ++= entityDao.find(classOf[AssetGroup], intIds("assetGroup"))
+    val newGroups = entityDao.find(classOf[AssetGroup], intIds("assetGroup"))
+    var oldGroups = Seq.empty[AssetGroup]
+    if (profile.persisted) {
+      oldGroups = getProfileAssetGroups(profile)
+      Collections.subtract(oldGroups, newGroups) foreach { g => g.profiles -= profile }
+    }
+    Collections.subtract(newGroups, oldGroups) foreach { g => g.profiles += profile }
+    entityDao.saveOrUpdate(oldGroups, newGroups)
+
     super.saveAndRedirect(profile)
+  }
+
+  private def getProfileAssetGroups(profile: Profile): Seq[AssetGroup] = {
+    val gQuery = OqlBuilder.from(classOf[AssetGroup], "g")
+    gQuery.where(":profile in elements(g.profiles)", profile)
+    entityDao.search(gQuery)
   }
 }

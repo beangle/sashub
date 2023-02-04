@@ -20,6 +20,7 @@ package org.beangle.sashub.model.config
 import org.beangle.data.model.LongId
 import org.beangle.data.model.pojo.Named
 import org.beangle.commons.collection.Collections
+import org.beangle.sashub.model.micdn.AssetGroup
 
 import scala.collection.mutable
 
@@ -54,8 +55,6 @@ class Profile extends LongId with Named {
   var sslProtocols: Option[String] = None
 
   var forceHttps: Boolean = true
-
-  var assetGroups: mutable.Set[AssetGroup] = Collections.newSet[AssetGroup]
 
   def qualifiedName: String = {
     if null == org then name else org.name + "." + name

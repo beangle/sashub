@@ -19,8 +19,11 @@ package org.beangle.sashub.web.ws.api
 
 import org.beangle.commons.lang.Strings
 import org.beangle.data.dao.{EntityDao, OqlBuilder}
+import org.beangle.ems.app.Ems
 import org.beangle.sashub.model.config.*
+import org.beangle.sashub.model.micdn.{Asset, AssetGroup}
 import org.beangle.sashub.service.ProfileService
+import org.beangle.security.web.session.SessionIdReader
 import org.beangle.web.action.annotation.{action, mapping, param}
 import org.beangle.web.action.support.{ActionSupport, ParamSupport, ServletSupport}
 import org.beangle.web.action.view.{Status, View}
@@ -121,22 +124,5 @@ class ConfigWS extends ActionSupport with ParamSupport with ServletSupport {
     put("backends", backends)
     put("webapps", webapps)
     put("entryPoints", entryPoints)
-  }
-
-  def asset(@param("profile") name: String): View = {
-    val profiles = profileService.getProfile(name)
-    if (profiles.size != 1) return Status.NotFound
-
-    val profile = profiles.head
-    put("profile", profile)
-    if (profile.assetGroups.isEmpty) {
-      put("assets", List.empty[Asset])
-    } else {
-      val query = OqlBuilder.from(classOf[Asset], "asset")
-      query.where("asset.group in(:groups)", profiles.head.assetGroups)
-      query.orderBy("asset.base")
-      put("assets", entityDao.search(query))
-    }
-    forward()
   }
 }

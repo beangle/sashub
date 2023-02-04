@@ -15,13 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.sashub.model.config
+package org.beangle.sashub.model.micdn
 
 import org.beangle.data.model.IntId
 
 object AssetBundle {
   def apply(asset: Asset, uri: String): AssetBundle = {
-    if (uri.contains("/")) {
+    if (uri.contains("/") && !uri.startsWith("gav")) {
       val location = if uri.startsWith("file://") then uri.substring("file://".length) else uri
       val sb = new AssetBundle
       sb.asset = asset

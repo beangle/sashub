@@ -15,22 +15,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.sashub.web.action.config
+package org.beangle.sashub.web.action.micdn
 
-import org.beangle.sashub.model.config.AssetGroup
+import org.beangle.sashub.model.micdn.{Asset, AssetGroup}
 import org.beangle.sashub.service.ProfileService
 import org.beangle.webmvc.support.action.RestfulAction
 
-class AssetGroupAction extends RestfulAction[AssetGroup] {
-
-  var profileService: ProfileService = _
-
-  override protected def editSetting(context: AssetGroup): Unit = {
-    put("profiles", profileService.getAll())
-    super.editSetting(context)
+class AssetAction extends RestfulAction[Asset] {
+  override protected def indexSetting(): Unit = {
+    put("groups", entityDao.getAll(classOf[AssetGroup]))
+    super.indexSetting()
   }
 
-  override protected def simpleEntityName: String = {
-    "group"
+  override protected def editSetting(context: Asset): Unit = {
+    put("groups", entityDao.getAll(classOf[AssetGroup]))
+    super.editSetting(context)
   }
 }

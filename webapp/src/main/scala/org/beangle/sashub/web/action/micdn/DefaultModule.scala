@@ -15,24 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.sashub.web.action.config
+package org.beangle.sashub.web.action.micdn
 
 import org.beangle.cdi.bind.BindModule
-import org.beangle.sashub.web.action.micdn.{AssetAction, AssetGroupAction}
 
 class DefaultModule extends BindModule {
 
   protected override def binding(): Unit = {
-    bind(classOf[OrganizationAction])
-    bind(classOf[ProfileAction])
-    bind(classOf[EngineAction])
-    bind(classOf[FarmAction])
-    bind(classOf[ServerAction])
-    bind(classOf[HostAction])
-    bind(classOf[ArtifactAction])
-    bind(classOf[WebappAction])
-    bind(classOf[PlatformAction])
-    bind(classOf[PlatformFeatureAction])
     bind(classOf[AssetAction])
     bind(classOf[AssetGroupAction])
   }

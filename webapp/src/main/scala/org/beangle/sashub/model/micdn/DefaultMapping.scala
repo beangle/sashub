@@ -15,11 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.sashub.model.config
+package org.beangle.sashub.model.micdn
 
-import org.beangle.data.model.IntId
-import org.beangle.data.model.pojo.{Named, Remark}
+import org.beangle.data.orm.MappingModule
+import org.beangle.sashub.model.micdn.{Asset, AssetBundle, AssetGroup}
 
-class AssetGroup extends IntId, Named, Remark {
+class DefaultMapping extends MappingModule {
+  override def binding(): Unit = {
+    bind[Asset].declare { e =>
+      e.bundles is depends("asset")
+    }
+    bind[AssetBundle]
 
+    bind[AssetGroup]
+  }
 }

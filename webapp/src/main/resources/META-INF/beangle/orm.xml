@@ -6,6 +6,7 @@
     <profile package="org.beangle.sashub.model" pluralize="true" schema="sas">
       <profile package="config"  prefix="cfg_"/>
       <profile package="ems" prefix="ems_"/>
+      <profile package="micdn" prefix="cdn_"/>
     </profile>
   </naming>
 </orm>

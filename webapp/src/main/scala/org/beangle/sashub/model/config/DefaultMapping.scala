@@ -18,6 +18,7 @@
 package org.beangle.sashub.model.config
 
 import org.beangle.data.orm.MappingModule
+import org.beangle.sashub.model.micdn.{Asset, AssetBundle, AssetGroup}
 
 class DefaultMapping extends MappingModule {
   override def binding(): Unit = {

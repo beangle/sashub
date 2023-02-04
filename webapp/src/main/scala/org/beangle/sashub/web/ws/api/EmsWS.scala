@@ -25,13 +25,13 @@ import org.beangle.web.action.annotation.{mapping, param}
 import org.beangle.web.action.support.{ActionSupport, ParamSupport, ServletSupport}
 import org.beangle.web.action.view.{Status, View}
 
-class MenuWS extends ActionSupport with ParamSupport with ServletSupport {
+class EmsWS extends ActionSupport with ParamSupport with ServletSupport {
 
   var profileService: ProfileService = _
   var entityDao: EntityDao = _
 
-  @mapping("{appName}")
-  def index(@param("profile") profileName: String, @param("appName") appName: String): View = {
+  @mapping("menus/{appName}")
+  def menus(@param("profile") profileName: String, @param("appName") appName: String): View = {
     profileService.getProfile(profileName) match {
       case None => Status.NotFound
       case Some(profile) =>

@@ -8,17 +8,9 @@
     </interceptors>
   </profile>
 
-  <profile name="sas-admin-ws" package="org.beangle.sashub.web.ws">
-    <action suffix="WS" defaultMethod="index" />
-    <url path="/" suffix="" style="plur-seo" />
-    <interceptors>
-      <interceptor name="web.Interceptor.hibernate" />
-    </interceptors>
-  </profile>
-
   <profile name="sas-api-ws" package="org.beangle.sashub.web.ws.api">
     <action suffix="WS" defaultMethod="index" />
-    <url path="/api/{profile}/" suffix="" style="plur-seo" />
+    <url path="/api/{profile}/" suffix="" style="seo" />
     <interceptors>
       <interceptor name="web.Interceptor.hibernate" />
     </interceptors>
