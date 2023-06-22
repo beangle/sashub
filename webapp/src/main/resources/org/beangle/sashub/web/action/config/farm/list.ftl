@@ -2,13 +2,15 @@
 [@b.head/]
 [@b.grid items=farms var="farm"]
   [@b.gridbar]
+    [#if (Parameters['farm.profile.id']!'')?length>1]
     bar.addItem("${b.text("action.new")}",action.add());
     bar.addItem("${b.text("action.modify")}",action.edit());
     bar.addItem("${b.text("action.delete")}",action.remove("确认删除?"));
+    [/#if]
   [/@]
   [@b.row]
     [@b.boxcol /]
-    [@b.col property="name" title="名称" width="8%"]${farm.name!}[/@]
+    [@b.col property="name" title="名称" width="10%"]${farm.name!}<span style="font-size:0.8rem;" class="text-muted">@${farm.profile.name}</span>[/@]
     [@b.col property="engine.name" title="引擎" width="12%"/]
     [@b.col property="maxHeapSize" title="堆上限" width="8%"]<span title="${farm.opts!}">${farm.maxHeapSize!}MB</span>[/@]
     [@b.col property="http.maxThreads" title="最大线程" width="8%"/]

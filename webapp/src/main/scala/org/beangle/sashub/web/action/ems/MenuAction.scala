@@ -88,7 +88,7 @@ class MenuAction extends RestfulAction[Menu] {
 
   @ignore
   protected override def saveAndRedirect(menu: Menu): View = {
-    val resources = entityDao.find(classOf[Resource], intIds("resource"))
+    val resources = entityDao.find(classOf[Resource], getIntIds("resource"))
     menu.resources.clear()
     menu.resources ++= resources
     //检查入口资源是否在使用资源列表中

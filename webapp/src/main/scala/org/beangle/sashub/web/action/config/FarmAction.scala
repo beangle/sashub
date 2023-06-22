@@ -40,7 +40,7 @@ class FarmAction extends RestfulAction[Farm] {
   }
 
   override protected def editSetting(entity: Farm): Unit = {
-    val profile = entityDao.get(classOf[Profile], longId("farm.profile"))
+    val profile = entityDao.get(classOf[Profile], getLongId("farm.profile"))
     val query = OqlBuilder.from(classOf[Engine], "engine")
     query.where("engine.profile is null or engine.profile=:profile", profile)
     put("engines", entityDao.search(query))
@@ -48,7 +48,7 @@ class FarmAction extends RestfulAction[Farm] {
   }
 
   override protected def saveAndRedirect(farm: Farm): View = {
-    val profile = entityDao.get(classOf[Profile], longId("farm.profile"))
+    val profile = entityDao.get(classOf[Profile], getLongId("farm.profile"))
     farm.profile = profile
     super.saveAndRedirect(farm)
   }

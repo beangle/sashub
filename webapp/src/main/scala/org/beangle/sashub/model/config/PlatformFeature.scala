@@ -38,4 +38,6 @@ class PlatformFeature extends LongId with Named {
   def support(platform: Platform): Boolean = {
     scripts.exists(_.platform == platform)
   }
+
+  def title: String = s"$name $version"
 }

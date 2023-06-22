@@ -11,7 +11,7 @@
   [@b.select label="平台" name="host.arch" value=host.arch.id items={'1':'Noarch','2':'X86_64','3':'AArch64'} required="true"/]
   [@b.select label="操作系统" name="host.platform.id" items=platforms required="true" value=host.platform!/]
   [@b.textfield label="系统详细版本" name="host.platformVersion" value=host.platformVersion! required="true" maxlength="80"  /]
-  [@b.select name="featureId" items=features required="false" label="系统特性" multiple="true" values=host.features  chosenMin="1" style="width:300px;" /]
+  [@b.select name="featureId" items=features?sort_by('name') required="false" label="系统特性"  option="id,title" multiple="true" values=host.features  chosenMin="1" style="width:300px;" /]
   [@b.formfoot]
     <input type="hidden" value="${profile.id}" name="host.profile.id"/>
     [@b.reset/] &nbsp;&nbsp;[@b.submit value="action.submit" /]

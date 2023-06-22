@@ -10,7 +10,7 @@
   [@b.row]
     [@b.boxcol /]
     [@b.col width="40%" property="name" title="名称"/]
-    [@b.col width="55" property="title" title="标题"/]
+    [@b.col property="title" title="标题"/]
   [/@]
 [/@]
 [@b.foot/]
