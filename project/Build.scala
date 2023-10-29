@@ -2,17 +2,17 @@ import org.beangle.parent.Dependencies._
 import sbt._
 
 object SasDepends {
-  val commonsVer = "5.5.3"
-  val dataVer = "5.6.19"
-  val cdiVer = "0.5.4"
-  val webVer = "0.4.2"
-  val serializerVer = "0.1.4"
-  val cacheVer = "0.1.4"
-  val templateVer = "0.1.6"
-  val webmvcVer = "0.9.3"
-  val securityVer = "4.3.8"
-  val idsVer = "0.3.10"
-  val emsVer = "4.6.18"
+  val commonsVer = "5.6.3"
+  val dataVer = "5.7.4"
+  val cdiVer = "0.5.5"
+  val webVer = "0.4.6"
+  val serializerVer = "0.1.5"
+  val cacheVer = "0.1.5"
+  val templateVer = "0.1.7"
+  val webmvcVer = "0.9.12"
+  val securityVer = "4.3.13"
+  val idsVer = "0.3.12"
+  val emsVer = "4.7.5"
 
   val commonsCore = "org.beangle.commons" %% "beangle-commons-core" % commonsVer
   val commonsFile = "org.beangle.commons" %% "beangle-commons-file" % commonsVer
