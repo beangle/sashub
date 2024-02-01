@@ -22,7 +22,7 @@ import org.beangle.webmvc.support.action.RestfulAction
 
 class ServerAction extends RestfulAction[Server] {
   override protected def editSetting(entity: Server): Unit = {
-    val farm = entityDao.get(classOf[Farm], longId("server.farm"))
+    val farm = entityDao.get(classOf[Farm], getLongId("server.farm"))
     val hosts = entityDao.findBy(classOf[Host], "profile", farm.profile).toBuffer
     put("hosts", hosts)
     put("farm", farm)

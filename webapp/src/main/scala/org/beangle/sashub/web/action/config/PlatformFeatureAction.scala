@@ -40,7 +40,7 @@ class PlatformFeatureAction extends RestfulAction[PlatformFeature] {
 
   def addScript(): View = {
     put("platforms", entityDao.getAll(classOf[Platform]))
-    val feature = entityDao.get(classOf[PlatformFeature], longId("feature"))
+    val feature = entityDao.get(classOf[PlatformFeature], getLongId("feature"))
     val script = new PlatformFeatureScript
     script.feature = feature
     put("script", script)
@@ -55,14 +55,14 @@ class PlatformFeatureAction extends RestfulAction[PlatformFeature] {
   }
 
   def removeScript(): View = {
-    val script = entityDao.get(classOf[PlatformFeatureScript], longId("script"))
+    val script = entityDao.get(classOf[PlatformFeatureScript], getLongId("script"))
     entityDao.remove(script)
     redirect("info", "id=" + script.feature.id, "info.remove.success")
   }
 
   def editScript(): View = {
     put("platforms", entityDao.getAll(classOf[Platform]))
-    val script = entityDao.get(classOf[PlatformFeatureScript], longId("script"))
+    val script = entityDao.get(classOf[PlatformFeatureScript], getLongId("script"))
     put("script", script)
     forward("scriptForm")
   }

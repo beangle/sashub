@@ -39,7 +39,7 @@ class ProfileAction extends RestfulAction[Profile] {
   }
 
   override protected def saveAndRedirect(profile: Profile): View = {
-    val newGroups = entityDao.find(classOf[AssetGroup], intIds("assetGroup"))
+    val newGroups = entityDao.find(classOf[AssetGroup], getIntIds("assetGroup"))
     var oldGroups = Seq.empty[AssetGroup]
     if (profile.persisted) {
       oldGroups = getProfileAssetGroups(profile)

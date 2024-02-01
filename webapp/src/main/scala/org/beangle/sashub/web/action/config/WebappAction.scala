@@ -29,7 +29,7 @@ import org.beangle.webmvc.support.action.RestfulAction
 class WebappAction extends RestfulAction[Webapp] {
   var profileService: ProfileService = _
   def upgrade(): View = {
-    val webapps = entityDao.find(classOf[Webapp], longIds("webapp"))
+    val webapps = entityDao.find(classOf[Webapp], getLongIds("webapp"))
     webapps.foreach { webapp =>
       webapp.version = webapp.artifact.latestVersion
     }
@@ -48,7 +48,7 @@ class WebappAction extends RestfulAction[Webapp] {
   }
 
   override protected def editSetting(webapp: Webapp): Unit = {
-    val profile = entityDao.get(classOf[Profile], longId("webapp.profile"))
+    val profile = entityDao.get(classOf[Profile], getLongId("webapp.profile"))
     put("profile", profile)
     val query = OqlBuilder.from(classOf[Server], "server")
     query.where("server.farm.profile =:profile", profile)
@@ -65,7 +65,7 @@ class WebappAction extends RestfulAction[Webapp] {
   }
 
   override protected def saveAndRedirect(webapp: Webapp): View = {
-    val profile = entityDao.get(classOf[Profile], longId("webapp.profile"))
+    val profile = entityDao.get(classOf[Profile], getLongId("webapp.profile"))
     webapp.profile = profile
     webapp.targets.clear()
     webapp.targets ++= entityDao.find(classOf[Server], getAll("server.id", classOf[Long]))

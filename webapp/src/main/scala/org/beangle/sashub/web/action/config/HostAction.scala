@@ -42,7 +42,7 @@ class HostAction extends RestfulAction[Host] {
     if (host.persisted) {
       put("profile", host.profile)
     } else {
-      put("profile", entityDao.get(classOf[Profile], longId("host.profile")))
+      put("profile", entityDao.get(classOf[Profile], getLongId("host.profile")))
     }
   }
 

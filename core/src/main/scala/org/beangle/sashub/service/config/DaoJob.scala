@@ -15,15 +15,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.sashub.service
+package org.beangle.sashub.service.config
 
-import org.beangle.cdi.bind.BindModule
-import org.beangle.sashub.service.impl.{DefaultProfileService, MenuServiceImpl}
+import org.beangle.data.dao.EntityDao
+import org.beangle.data.orm.hibernate.SessionHelper
+import org.hibernate.SessionFactory
 
-class DefaultModule extends BindModule {
+abstract class DaoJob extends Runnable {
+  var entityDao: EntityDao = _
+  var sessionFactory: SessionFactory = _
 
-  protected override def binding(): Unit = {
-    bind(classOf[DefaultProfileService])
-    bind(classOf[MenuServiceImpl])
+  override def run(): Unit = {
+    val session = SessionHelper.openSession(sessionFactory)
+    try {
+      execute()
+    } finally {
+      SessionHelper.closeSession(session.session)
+    }
   }
+
+  def execute(): Unit
+
 }
