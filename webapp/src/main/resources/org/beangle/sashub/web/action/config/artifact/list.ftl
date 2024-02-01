@@ -5,6 +5,7 @@
     bar.addItem("${b.text("action.new")}",action.add());
     bar.addItem("${b.text("action.modify")}",action.edit());
     bar.addItem("${b.text("action.delete")}",action.remove("确认删除?"));
+    bar.addItem("更新版本",action.multi("updateVersion"));
   [/@]
   [@b.row]
     [@b.boxcol /]

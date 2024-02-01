@@ -17,8 +17,9 @@
 
 package org.beangle.sashub.web.action.config
 
-import org.beangle.sashub.model.config.{Artifact, Profile, Webapp}
+import org.beangle.sashub.model.config.{Artifact, Webapp}
 import org.beangle.sashub.service.ProfileService
+import org.beangle.sashub.service.config.ArtifactVersionRefresher
 import org.beangle.web.action.annotation.mapping
 import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.action.RestfulAction
@@ -26,6 +27,8 @@ import org.beangle.webmvc.support.action.RestfulAction
 class ArtifactAction extends RestfulAction[Artifact] {
 
   var profileService: ProfileService = _
+
+  var artifactVersionRefresher: ArtifactVersionRefresher = _
 
   @mapping(value = "{id}")
   override def info(id: String): View = {
@@ -38,5 +41,11 @@ class ArtifactAction extends RestfulAction[Artifact] {
     if (!artifact.persisted) artifact.resolveSupport = true
     put("profiles", profileService.getAll())
     super.editSetting(artifact)
+  }
+
+  def updateVersion(): View = {
+    val artifacts = entityDao.find(classOf[Artifact], getLongIds("artifact"))
+    artifactVersionRefresher.refresh(artifacts)
+    redirect("search", "info.save.success")
   }
 }
