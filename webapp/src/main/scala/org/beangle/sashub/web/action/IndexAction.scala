@@ -21,10 +21,10 @@ import org.beangle.ems.app.web.NavContext
 import org.beangle.security.Securities
 import org.beangle.security.realm.cas.{Cas, CasConfig}
 import org.beangle.security.session.cache.CacheSessionRepo
-import org.beangle.web.action.annotation.action
-import org.beangle.web.action.context.ActionContext
-import org.beangle.web.action.support.{ActionSupport, ServletSupport}
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.annotation.action
+import org.beangle.webmvc.context.ActionContext
+import org.beangle.webmvc.support.{ActionSupport, ServletSupport}
+import org.beangle.webmvc.view.View
 
 @action("")
 class IndexAction extends ActionSupport with ServletSupport {

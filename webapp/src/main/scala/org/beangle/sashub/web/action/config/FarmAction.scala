@@ -21,7 +21,7 @@ import org.beangle.data.dao.OqlBuilder
 import org.beangle.sashub.model.config.{Engine, Farm, Host, Profile}
 import org.beangle.sashub.service.ProfileService
 import org.beangle.sashub.web.action.helper.ProfileHelper
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.view.View
 import org.beangle.webmvc.support.action.RestfulAction
 
 /** 群集管理

@@ -17,7 +17,7 @@
 
 package org.beangle.sashub.web.action.config
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 import org.beangle.sashub.web.action.micdn.{AssetAction, AssetGroupAction}
 
 class DefaultModule extends BindModule {

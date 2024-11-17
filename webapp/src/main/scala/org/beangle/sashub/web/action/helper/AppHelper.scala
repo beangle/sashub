@@ -20,7 +20,7 @@ package org.beangle.sashub.web.action.helper
 import org.beangle.sashub.model.ems.App
 import org.beangle.commons.lang.Numbers
 import org.beangle.data.dao.EntityDao
-import org.beangle.web.action.context.{ActionContext, Params}
+import org.beangle.webmvc.context.{ActionContext, Params}
 import org.beangle.web.servlet.util.CookieUtils
 
 object AppHelper {

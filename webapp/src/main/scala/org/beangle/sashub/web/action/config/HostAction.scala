@@ -21,9 +21,9 @@ import org.beangle.data.dao.OqlBuilder
 import org.beangle.sashub.model.config.*
 import org.beangle.sashub.service.ProfileService
 import org.beangle.sashub.web.action.helper.ProfileHelper
-import org.beangle.web.action.annotation.mapping
-import org.beangle.web.action.context.{ActionContext, Params}
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.annotation.mapping
+import org.beangle.webmvc.context.{ActionContext, Params}
+import org.beangle.webmvc.view.View
 import org.beangle.web.servlet.util.CookieUtils
 import org.beangle.webmvc.support.action.RestfulAction
 

@@ -17,11 +17,11 @@
 
 package org.beangle.sashub.web
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 import org.beangle.commons.lang.ClassLoaders
 import org.beangle.data.orm.hibernate.{DomainFactory, HibernateEntityDao, HibernateTransactionManager, LocalSessionFactoryBean}
-import org.beangle.ems.app.datasource.AppDataSourceFactory
-import org.beangle.webmvc.hibernate.CloseSessionInterceptor
+import org.beangle.ems.app.dao.AppDataSourceFactory
+import org.beangle.webmvc.support.hibernate.CloseSessionInterceptor
 import org.springframework.beans.factory.config.PropertiesFactoryBean
 import org.springframework.transaction.interceptor.TransactionProxyFactoryBean
 

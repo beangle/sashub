@@ -18,7 +18,7 @@
 package org.beangle.sashub.web.action.ems
 
 import org.beangle.sashub.model.ems.{App, AppGroup, Menu}
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.view.View
 import org.beangle.webmvc.support.action.RestfulAction
 
 class AppAction extends RestfulAction[App] {

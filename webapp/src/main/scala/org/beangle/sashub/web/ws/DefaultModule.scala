@@ -17,7 +17,7 @@
 
 package org.beangle.sashub.web.ws
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 import org.beangle.sashub.web.ws.api
 
 class DefaultModule extends BindModule {

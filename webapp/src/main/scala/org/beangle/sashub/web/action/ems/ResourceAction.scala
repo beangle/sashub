@@ -18,7 +18,7 @@
 package org.beangle.sashub.web.action.ems
 
 import org.beangle.sashub.model.ems.{App, Menu, Resource}
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.view.View
 import org.beangle.webmvc.support.action.RestfulAction
 import org.beangle.data.dao.OqlBuilder
 import org.beangle.data.model.Entity

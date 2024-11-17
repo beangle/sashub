@@ -17,7 +17,7 @@
 
 package org.beangle.sashub.web.action
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 import org.beangle.sashub.web.action.config
 
 class DefaultModule extends BindModule {

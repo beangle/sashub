@@ -20,7 +20,7 @@ package org.beangle.sashub.web.action.helper
 import org.beangle.commons.lang.Strings
 import org.beangle.data.dao.EntityDao
 import org.beangle.sashub.model.config.Profile
-import org.beangle.web.action.context.{ActionContext, Params}
+import org.beangle.webmvc.context.{ActionContext, Params}
 import org.beangle.web.servlet.util.CookieUtils
 
 object ProfileHelper {

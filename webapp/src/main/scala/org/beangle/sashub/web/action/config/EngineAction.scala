@@ -20,7 +20,7 @@ package org.beangle.sashub.web.action.config
 import org.beangle.commons.lang.Strings
 import org.beangle.sashub.model.config.{Engine, Profile}
 import org.beangle.sashub.service.ProfileService
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.view.View
 import org.beangle.webmvc.support.action.RestfulAction
 
 /** Engine管理

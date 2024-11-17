@@ -18,7 +18,7 @@
 package org.beangle.sashub.web.action.ems
 
 import org.beangle.sashub.model.ems.{App, Menu, Resource}
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.view.View
 import org.beangle.webmvc.support.action.RestfulAction
 import jakarta.servlet.http.Part
 import org.beangle.commons.collection.Collections
@@ -26,7 +26,7 @@ import org.beangle.data.dao.OqlBuilder
 import org.beangle.data.model.util.Hierarchicals
 import org.beangle.sashub.service.MenuService
 import org.beangle.sashub.web.action.helper.AppHelper
-import org.beangle.web.action.annotation.ignore
+import org.beangle.webmvc.annotation.ignore
 
 class MenuAction extends RestfulAction[Menu] {
   var menuService: MenuService = _

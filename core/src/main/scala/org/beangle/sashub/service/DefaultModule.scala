@@ -17,7 +17,7 @@
 
 package org.beangle.sashub.service
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 import org.beangle.sashub.service.config.DefaultArtifactVersionRefresher
 import org.beangle.sashub.service.impl.{DefaultProfileService, MenuServiceImpl}
 import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler

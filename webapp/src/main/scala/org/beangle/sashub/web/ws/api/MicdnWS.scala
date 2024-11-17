@@ -22,9 +22,9 @@ import org.beangle.data.dao.{EntityDao, OqlBuilder}
 import org.beangle.sashub.model.config.*
 import org.beangle.sashub.model.micdn.{Asset, AssetGroup}
 import org.beangle.sashub.service.ProfileService
-import org.beangle.web.action.annotation.{action, mapping, param}
-import org.beangle.web.action.support.{ActionSupport, ParamSupport, ServletSupport}
-import org.beangle.web.action.view.{Status, View}
+import org.beangle.webmvc.annotation.{action, mapping, param}
+import org.beangle.webmvc.support.{ActionSupport, ParamSupport, ServletSupport}
+import org.beangle.webmvc.view.{Status, View}
 
 import scala.collection.mutable
 

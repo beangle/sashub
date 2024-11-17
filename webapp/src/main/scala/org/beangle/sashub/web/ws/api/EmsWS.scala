@@ -21,9 +21,9 @@ import org.beangle.data.dao.{EntityDao, OqlBuilder}
 import org.beangle.sashub.model.config.Webapp
 import org.beangle.sashub.model.ems.{App, Menu, Resource}
 import org.beangle.sashub.service.ProfileService
-import org.beangle.web.action.annotation.{mapping, param}
-import org.beangle.web.action.support.{ActionSupport, ParamSupport, ServletSupport}
-import org.beangle.web.action.view.{Status, View}
+import org.beangle.webmvc.annotation.{mapping, param}
+import org.beangle.webmvc.support.{ActionSupport, ParamSupport, ServletSupport}
+import org.beangle.webmvc.view.{Status, View}
 
 class EmsWS extends ActionSupport with ParamSupport with ServletSupport {
 

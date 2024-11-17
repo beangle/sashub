@@ -21,7 +21,7 @@ import org.beangle.commons.collection.Collections
 import org.beangle.data.dao.OqlBuilder
 import org.beangle.sashub.model.config.{Organization, Profile}
 import org.beangle.sashub.model.micdn.AssetGroup
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.view.View
 import org.beangle.webmvc.support.action.RestfulAction
 
 class ProfileAction extends RestfulAction[Profile] {

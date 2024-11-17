@@ -32,7 +32,7 @@ object SasDepends {
   val b_ids = "org.beangle.ids" % "beangle-ids" % idsVer
   val b_event = "org.beangle.event" % "beangle-event" % eventVer
   val b_doc_transfer = "org.beangle.doc" % "beangle-doc-transfer" % docVer
-  val b_ems_app = "org.beangle.ems" %% "beangle-ems-app" % emsVer
+  val b_ems_app = "org.beangle.ems" % "beangle-ems-app" % emsVer
 
   val caffeine_jcache = "com.github.ben-manes.caffeine" % "jcache" % "3.1.8" exclude("org.osgi", "org.osgi.service.component.annotations") exclude("javax.inject", "javax.inject")
 

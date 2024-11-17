@@ -18,7 +18,7 @@
 package org.beangle.sashub.web.action.config
 
 import org.beangle.sashub.model.config.{Platform, PlatformFeature, PlatformFeatureScript}
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.view.View
 import org.beangle.webmvc.support.action.RestfulAction
 import org.beangle.commons.lang.Strings
 
