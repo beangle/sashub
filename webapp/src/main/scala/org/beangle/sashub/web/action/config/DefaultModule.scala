@@ -18,7 +18,6 @@
 package org.beangle.sashub.web.action.config
 
 import org.beangle.commons.cdi.BindModule
-import org.beangle.sashub.web.action.micdn.{AssetAction, AssetGroupAction}
 
 class DefaultModule extends BindModule {
 
@@ -33,8 +32,6 @@ class DefaultModule extends BindModule {
     bind(classOf[WebappAction])
     bind(classOf[PlatformAction])
     bind(classOf[PlatformFeatureAction])
-    bind(classOf[AssetAction])
-    bind(classOf[AssetGroupAction])
   }
 
 }

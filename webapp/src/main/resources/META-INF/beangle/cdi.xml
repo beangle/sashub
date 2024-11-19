@@ -8,9 +8,16 @@
     <module class="org.beangle.sashub.web.ws.DefaultModule"/>
     <module class="org.beangle.sashub.web.DaoModule"/>
     <module class="org.beangle.sashub.service.DefaultModule"/>
-
+    <module class="org.beangle.webmvc.view.freemarker.DefaultModule"/>
+    <module class="org.beangle.ems.app.web.HibernateModule"/>
     <module class="org.beangle.ems.app.cas.DefaultModule"/>
+    <module class="org.beangle.ems.app.log.DefaultModule"/>
+    <module class="org.beangle.ems.app.config.DefaultModule"/>
+    <module class="org.beangle.ems.app.web.DefaultModule"/>
     <module class="org.beangle.ems.app.web.WebReconfigModule"/>
+    <module class="org.beangle.ems.app.cache.DefaultModule"/>
+    <module class="org.beangle.ems.app.event.EventModule"/>
+
     <module class="org.beangle.serializer.text.DefaultModule"/>
     <module class="org.beangle.serializer.json.DefaultModule"/>
     <module class="org.beangle.serializer.xml.DefaultModule"/>

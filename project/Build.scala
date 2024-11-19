@@ -4,13 +4,13 @@ import sbt.*
 object SasDepends {
   val commonsVer = "5.6.22"
   val jdbcVer = "1.0.6"
-  val dataVer = "5.8.17"
+  val dataVer = "5.8.18"
   val cdiVer = "0.7.0"
   val webVer = "0.6.0"
   val serializerVer = "0.1.13"
   val cacheVer = "0.1.12"
   val templateVer = "0.1.21"
-  val webmvcVer = "0.10.0"
+  val webmvcVer = "0.10.1"
   val buiVer = "0.0.1"
   val securityVer = "4.3.25"
   val idsVer = "0.3.21"
@@ -38,5 +38,5 @@ object SasDepends {
 
   val appDepends = Seq(b_commons, logback_classic, logback_core, scalatest, b_web, b_bui_bootstrap, gson, HikariCP) ++
     Seq(b_model, hibernate_core, b_jdbc, b_cache, b_security, b_template, hibernate_jcache) ++
-    Seq(postgresql, b_ems_app, b_serializer, caffeine_jcache, hibernate_jcache)
+    Seq(postgresql, b_ems_app, b_serializer, caffeine_jcache, hibernate_jcache, freemarker)
 }

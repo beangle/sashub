@@ -48,8 +48,6 @@ object DaoModule extends BindModule {
     bind("EntityDao.hibernate", classOf[TransactionProxyFactoryBean]).proxy("target", classOf[HibernateEntityDao])
       .parent("TransactionProxy.template").primary().description("基于Hibernate提供的通用DAO")
 
-    bind("web.Interceptor.hibernate", classOf[CloseSessionInterceptor])
-
     bind(classOf[DomainFactory]).constructor(list(ref("SessionFactory.default")))
   }
 
