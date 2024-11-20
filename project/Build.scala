@@ -6,7 +6,7 @@ object SasDepends {
   val jdbcVer = "1.0.6"
   val dataVer = "5.8.18"
   val cdiVer = "0.7.0"
-  val webVer = "0.6.0"
+  val webVer = "0.6.1"
   val serializerVer = "0.1.13"
   val cacheVer = "0.1.12"
   val templateVer = "0.1.21"
@@ -16,7 +16,7 @@ object SasDepends {
   val idsVer = "0.3.21"
   val eventVer = "0.0.9"
   val docVer = "0.4.5"
-  val emsVer = "4.10.7"
+  val emsVer = "4.10.9"
 
   val b_commons = "org.beangle.commons" % "beangle-commons" % commonsVer
   val b_jdbc = "org.beangle.jdbc" % "beangle-jdbc" % jdbcVer
