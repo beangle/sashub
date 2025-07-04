@@ -25,7 +25,7 @@
   [@b.field label="样例仓库"]
     <div style="margin-left:100px">
     <span style="font-size:0.8rem;color: #999;">Maven官方:</span>https://repo1.maven.org/maven2<br>
-    <span style="font-size:0.8rem;color: #999;">阿里云:</span>https://maven.aliyun.com/nexus/content/groups/public<br>
+    <span style="font-size:0.8rem;color: #999;">阿里云:</span>https://maven.aliyun.com/repository/public<br>
     <span style="font-size:0.8rem;color: #999;">华为云:</span>https://repo.huaweicloud.com/repository/maven/
     </div>
   [/@]

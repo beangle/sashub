@@ -17,24 +17,15 @@
 
 package org.beangle.sashub.model.config
 
-import org.beangle.data.model.LongId
+import org.scalatest.funspec.AnyFunSpec
+import org.scalatest.matchers.should.Matchers
 
-import scala.collection.mutable
-
-class Webapp extends LongId {
-  var artifact: Artifact = _
-  var profile: Profile = _
-  var version: String = _
-
-  var unpack: Boolean = false
-  var targets: mutable.Buffer[Server] = new mutable.ArrayBuffer[Server]
-  var contextPath: String = _
-
-  def gav: String = {
-    artifact.gav(version)
-  }
-
-  def updatable: Boolean = {
-    Version.isNewer(artifact.latestVersion, version)
+class VersionTest extends AnyFunSpec with Matchers {
+  describe("Version") {
+    it("isNewer") {
+      assert(Version.isNewer("0.3.4", "0.3.4-SNAPSHOT"))
+      assert(Version.isNewer("0.3.10", "0.3.4"))
+      assert(Version.isNewer("0.4", "0.3.4"))
+    }
   }
 }

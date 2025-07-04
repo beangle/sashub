@@ -17,16 +17,16 @@
 
 package org.beangle.sashub.web.action.ems
 
-import org.beangle.sashub.model.ems.{App, Menu, Resource}
-import org.beangle.webmvc.view.View
-import org.beangle.webmvc.support.action.RestfulAction
 import jakarta.servlet.http.Part
 import org.beangle.commons.collection.Collections
 import org.beangle.data.dao.OqlBuilder
 import org.beangle.data.model.util.Hierarchicals
+import org.beangle.sashub.model.ems.{App, Menu, Resource}
 import org.beangle.sashub.service.MenuService
 import org.beangle.sashub.web.action.helper.AppHelper
 import org.beangle.webmvc.annotation.ignore
+import org.beangle.webmvc.support.action.RestfulAction
+import org.beangle.webmvc.view.View
 
 class MenuAction extends RestfulAction[Menu] {
   var menuService: MenuService = _
@@ -103,7 +103,9 @@ class MenuAction extends RestfulAction[Menu] {
     var parent: Menu = null
     if (newParentId.isDefined) parent = entityDao.get(classOf[Menu], newParentId.get)
 
+    menu.indexno = "1"
     menuService.move(menu, parent, indexno)
+    entityDao.saveOrUpdate(menu)
     if (!menu.enabled) {
       val family = Hierarchicals.getFamily(menu)
       for (one <- family) one.enabled = false
@@ -127,7 +129,7 @@ class MenuAction extends RestfulAction[Menu] {
       val app = menus.head.app
       put("resources", entityDao.findBy(classOf[Resource], "app", app))
     else
-      put("resources",List.empty[Resource])
+      put("resources", List.empty[Resource])
     forward()
   }
 

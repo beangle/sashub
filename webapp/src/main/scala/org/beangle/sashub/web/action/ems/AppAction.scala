@@ -17,8 +17,7 @@
 
 package org.beangle.sashub.web.action.ems
 
-import org.beangle.sashub.model.ems.{App, AppGroup, Menu}
-import org.beangle.webmvc.view.View
+import org.beangle.sashub.model.ems.{App, AppGroup}
 import org.beangle.webmvc.support.action.RestfulAction
 
 class AppAction extends RestfulAction[App] {
@@ -28,7 +27,7 @@ class AppAction extends RestfulAction[App] {
   }
 
   override protected def editSetting(entity: App): Unit = {
-    put("groups", entityDao.getAll(classOf[AppGroup]))
+    put("groups", entityDao.getAll(classOf[AppGroup]).sortBy(_.name))
     super.editSetting(entity)
   }
 }

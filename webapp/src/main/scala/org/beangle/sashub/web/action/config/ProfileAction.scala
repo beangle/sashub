@@ -44,6 +44,8 @@ class ProfileAction extends RestfulAction[Profile] {
     if (profile.persisted) {
       oldGroups = getProfileAssetGroups(profile)
       Collections.subtract(oldGroups, newGroups) foreach { g => g.profiles -= profile }
+    } else {
+      entityDao.saveOrUpdate(profile)
     }
     Collections.subtract(newGroups, oldGroups) foreach { g => g.profiles += profile }
     entityDao.saveOrUpdate(oldGroups, newGroups)

@@ -14,7 +14,7 @@
     [/@]
     [@b.col property="artifact.artifactId" title="名称" width="21%"]${webapp.artifact.artifactId}[/@]
     [@b.col property="version" title="版本" width="12%"]
-      [#if webapp.version != webapp.artifact.latestVersion]<span title="可升级至${webapp.artifact.latestVersion}">${webapp.version}<i class="fa-solid fa-circle-up"></i></span>[#else]${webapp.version}[/#if]
+      [#if webapp.updatable]<span title="可升级至${webapp.artifact.latestVersion}">${webapp.version}<i class="fa-solid fa-circle-up"></i></span>[#else]${webapp.version}[/#if]
     [/@]
     [@b.col property="contextPath" title="上下文" width="14%" style="text-align:left;padding-left:10px"/]
     [@b.col title="运行在" width="35%"]
