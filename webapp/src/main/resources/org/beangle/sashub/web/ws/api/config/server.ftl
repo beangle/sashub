@@ -47,6 +47,7 @@
     [#list webapps as webapp]
     <Webapp uri="gav://${webapp.artifact.gav(webapp.version)}" path="${webapp.contextPath}" [#rt]
      runAt="[#list webapp.targets as s]${s.farm.name}.${s.name}[#sep],[/#list]" [#t]
+     [#if webapp.libs??] libs="${webapp.libs}"[/#if][#t]
      [#if webapp.unpack] unpack="true"[/#if][#t]
      [#if !webapp.artifact.resolveSupport] resolveSupport="false"[/#if] /> [#lt]
     [/#list]

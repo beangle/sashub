@@ -15,28 +15,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.beangle.sashub.model.config
+package org.beangle.sashub.web.action.monitor
 
-import org.beangle.data.model.LongId
+import org.beangle.webmvc.support.ActionSupport
+import org.beangle.webmvc.view.View
 
-import scala.collection.mutable
+class ServerAction extends ActionSupport {
 
-class Webapp extends LongId {
-  var artifact: Artifact = _
-  var profile: Profile = _
-  var version: String = _
-
-  var unpack: Boolean = false
-  var targets: mutable.Buffer[Server] = new mutable.ArrayBuffer[Server]
-  var contextPath: String = _
-
-  var libs: Option[String] = None
-
-  def gav: String = {
-    artifact.gav(version)
-  }
-
-  def updatable: Boolean = {
-    Version.isNewer(artifact.latestVersion, version)
+  def index(): View = {
+    forward()
   }
 }

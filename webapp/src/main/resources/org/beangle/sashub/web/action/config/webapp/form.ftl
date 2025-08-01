@@ -10,6 +10,7 @@
   [@b.radios label="解压执行" name="webapp.unpack" value=webapp.unpack!/]
   [@b.select label="运行在" name="server.id" items=servers required="true" values=webapp.targets! multiple="true"
              option=r"${item.farm.name}.${item.name}(${item.host.name}:${item.httpPort})" chosenMin="1" style="width:500px"/]
+  [@b.textfield label="扩展库" name="webapp.libs" value=webapp.libs! maxlength="300" comment="gav形式,分号或逗号分割"/]
   [@b.formfoot]
     <input type="hidden" value="${profile.id}" name="webapp.profile.id"/>
     [@b.reset/] &nbsp;&nbsp;[@b.submit value="action.submit" /]
