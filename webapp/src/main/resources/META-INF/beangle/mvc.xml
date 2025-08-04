@@ -8,6 +8,10 @@
     </interceptors>
   </profile>
 
+  <profile name="sas-admin-repo" package="org.beangle.sashub.web.action.repo">
+    <url path="/repo" suffix="" style="seo" />
+  </profile>
+
   <profile name="sas-api-ws" package="org.beangle.sashub.web.ws.api">
     <action suffix="WS" defaultMethod="index" />
     <url path="/api/{profile}/" suffix="" style="seo" />

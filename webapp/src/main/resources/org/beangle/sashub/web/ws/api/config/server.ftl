@@ -1,6 +1,7 @@
 [#ftl attributes={'content_type':'application/xml'}]
 <Sas version="${profile.sasVersion}">
   <Repository remote="${profile.remoteRepo}"/>
+  <SnapshotRepo remote="${sas_remote_url}/repo/snapshot"/>
   <Engines>
     [#list engines as engine]
     <Engine name="${engine.name}" type="${engine.typ}" version="${engine.version}"[#if engine.javaEngine] jspSupport="${engine.jspSupport?c}" websocketSupport="${engine.websocketSupport?c}"[/#if]>
