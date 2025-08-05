@@ -32,9 +32,10 @@ class SnapshotAction extends ActionSupport {
   @mapping(method = "head", value = "{path*}")
   def access(): View = {
     val path = getPath()
+    val ext = getExt(path)
     val res = ActionContext.current.response
     val localPath = SystemInfo.user.home + "/.m2/snapshots/" + path
-    if (path.endsWith("-SNAPSHOT.jar")) {
+    if (path.endsWith("-SNAPSHOT" + ext)) {
       findLatest(path) match {
         case None => Status.NotFound
         case Some(f) =>
@@ -57,8 +58,10 @@ class SnapshotAction extends ActionSupport {
   @mapping(method = "get", value = "{path*}")
   def download(): View = {
     val path = getPath()
+    val ext = getExt(path)
+
     val localPath = SystemInfo.user.home + "/.m2/snapshots/" + path
-    if (path.endsWith("-SNAPSHOT.jar")) {
+    if (path.endsWith("-SNAPSHOT" + ext)) {
       findLatest(path) match {
         case None => Status.NotFound
         case Some(f) =>
@@ -80,6 +83,12 @@ class SnapshotAction extends ActionSupport {
     }
   }
 
+  private def getExt(path: String): String = {
+    var ext = Strings.substringAfterLast(path, ".")
+    if (Strings.isNotEmpty(ext)) ext = "." + ext
+    ext
+  }
+
   private def getPath(): String = {
     val uri = ActionContext.current.request.getRequestURI
     var path = get("path", "")
@@ -93,21 +102,23 @@ class SnapshotAction extends ActionSupport {
   private def findLatest(path: String): Option[File] = {
     val root = SystemInfo.user.home + "/.m2/snapshots/"
     val localPath = root + path
+    val ext = getExt(path)
     val parent = new File(localPath).getParentFile
     if (parent.exists()) {
-      val prefix = Strings.substringBefore(Strings.substringAfterLast(path, "/"), "-SNAPSHOT.jar") + "-"
-      val snapshots = parent.list().toList
+      val prefix = Strings.substringBefore(Strings.substringAfterLast(path, "/"), "-SNAPSHOT" + ext) + "-"
+      val children = parent.list()
+      val snapshots = if null == children then List.empty else children.toList
       val versions = Collections.newBuffer[SnaphotTimestamp]
       for (s <- snapshots) {
-        if (s.startsWith(prefix) && s.endsWith(".jar")) {
-          val ts = Strings.substringBetween(s, prefix, ".jar")
+        if (s.startsWith(prefix) && s.endsWith(ext)) {
+          val ts = Strings.substringBetween(s, prefix, ext)
           versions += new SnaphotTimestamp(ts)
         }
       }
       val rs = versions.sorted
       if (rs.isEmpty) None
       else {
-        val filePath = root + Strings.replace(path, "SNAPSHOT.jar", rs.last.toString + ".jar")
+        val filePath = root + Strings.replace(path, "SNAPSHOT" + ext, rs.last.toString + ext)
         val target = new File(filePath)
         if (target.exists()) Some(target) else None
       }
