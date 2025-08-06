@@ -32,6 +32,7 @@ class DefaultModule extends BindModule {
     bind(classOf[WebappAction])
     bind(classOf[PlatformAction])
     bind(classOf[PlatformFeatureAction])
+    bind(classOf[SnapshotAction])
   }
 
 }
