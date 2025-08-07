@@ -17,26 +17,28 @@
 
 package org.beangle.sashub.web.action.repo
 
-import org.beangle.commons.collection.Collections
+import org.beangle.commons.codec.binary.Base64
 import org.beangle.commons.io.IOs
-import org.beangle.commons.lang.{Objects, Strings, SystemInfo}
-import org.beangle.webmvc.annotation.mapping
+import org.beangle.commons.lang.{Strings, SystemInfo}
+import org.beangle.ems.app.EmsApp
+import org.beangle.sashub.service.repo.SnapshotHelper
+import org.beangle.webmvc.annotation.{mapping, param}
 import org.beangle.webmvc.context.ActionContext
 import org.beangle.webmvc.support.ActionSupport
 import org.beangle.webmvc.view.{Status, View}
 
-import java.io.{File, FileInputStream}
+import java.io.{File, FileInputStream, FileOutputStream}
 
 class SnapshotAction extends ActionSupport {
 
-  @mapping(method = "head", value = "{path*}")
+  @mapping("{path*}", method = "head")
   def access(): View = {
     val path = getPath()
     val ext = getExt(path)
     val res = ActionContext.current.response
     val localPath = SystemInfo.user.home + "/.m2/snapshots/" + path
     if (path.endsWith("-SNAPSHOT" + ext)) {
-      findLatest(path) match {
+      SnapshotHelper.findLatest(path) match {
         case None => Status.NotFound
         case Some(f) =>
           res.addHeader("latest", f.getName)
@@ -55,14 +57,14 @@ class SnapshotAction extends ActionSupport {
     }
   }
 
-  @mapping(method = "get", value = "{path*}")
+  @mapping("{path*}", method = "get")
   def download(): View = {
     val path = getPath()
     val ext = getExt(path)
 
     val localPath = SystemInfo.user.home + "/.m2/snapshots/" + path
     if (path.endsWith("-SNAPSHOT" + ext)) {
-      findLatest(path) match {
+      SnapshotHelper.findLatest(path) match {
         case None => Status.NotFound
         case Some(f) =>
           val request = ActionContext.current.request
@@ -83,15 +85,35 @@ class SnapshotAction extends ActionSupport {
     }
   }
 
+  @mapping("upload/{fileName}", method = "post")
+  def upload(@param("fileName") fileName: String): View = {
+    val request = ActionContext.current.request
+    val authorizationHeader = request.getHeader("Authorization")
+    if (Strings.isBlank(authorizationHeader) || !authorizationHeader.startsWith("Basic ")) {
+      Status.Forbidden
+    } else {
+      val usertoken = new String(Base64.decode(authorizationHeader.substring("Basic ".length).trim()))
+      if (usertoken == EmsApp.properties.get("snapshot.usertoken").orNull) {
+        val tmpFile = java.nio.file.Files.createTempFile("artifact", "war").toFile
+        IOs.copy(request.getInputStream, new FileOutputStream(tmpFile))
+        val msg = SnapshotHelper.upload(tmpFile, getPath("fileName"))
+        tmpFile.delete()
+        Status.Ok
+      } else {
+        Status.Forbidden
+      }
+    }
+  }
+
   private def getExt(path: String): String = {
     var ext = Strings.substringAfterLast(path, ".")
     if (Strings.isNotEmpty(ext)) ext = "." + ext
     ext
   }
 
-  private def getPath(): String = {
+  private def getPath(name: String = "path"): String = {
     val uri = ActionContext.current.request.getRequestURI
-    var path = get("path", "")
+    var path = get(name, "")
     val postfix = Strings.substringAfterLast(uri, ".")
     if (Strings.isNotBlank(postfix)) {
       path += ("." + postfix)
@@ -99,45 +121,4 @@ class SnapshotAction extends ActionSupport {
     path
   }
 
-  private def findLatest(path: String): Option[File] = {
-    val root = SystemInfo.user.home + "/.m2/snapshots/"
-    val localPath = root + path
-    val ext = getExt(path)
-    val parent = new File(localPath).getParentFile
-    if (parent.exists()) {
-      val prefix = Strings.substringBefore(Strings.substringAfterLast(path, "/"), "-SNAPSHOT" + ext) + "-"
-      val children = parent.list()
-      val snapshots = if null == children then List.empty else children.toList
-      val versions = Collections.newBuffer[SnaphotTimestamp]
-      for (s <- snapshots) {
-        if (s.startsWith(prefix) && s.endsWith(ext)) {
-          val ts = Strings.substringBetween(s, prefix, ext)
-          versions += new SnaphotTimestamp(ts)
-        }
-      }
-      val rs = versions.sorted
-      if (rs.isEmpty) None
-      else {
-        val filePath = root + Strings.replace(path, "SNAPSHOT" + ext, rs.last.toString + ext)
-        val target = new File(filePath)
-        if (target.exists()) Some(target) else None
-      }
-    } else {
-      None
-    }
-  }
-}
-
-case class SnaphotTimestamp(timestamp: String, build: Int) extends Ordered[SnaphotTimestamp] {
-  def this(s: String) = {
-    this(Strings.substringBeforeLast(s, "-"), Strings.substringAfterLast(s, "-").toInt)
-  }
-
-  override def toString: String = {
-    s"${timestamp}-${build}"
-  }
-
-  override def compare(that: SnaphotTimestamp): Int = {
-    Objects.compareBuilder.add(this.timestamp, that.timestamp).add(this.build, that.build).build()
-  }
 }

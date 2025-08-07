@@ -19,13 +19,11 @@ package org.beangle.sashub.web.action.config
 
 import jakarta.servlet.http.Part
 import org.beangle.commons.io.IOs
-import org.beangle.commons.lang.{Strings, SystemInfo}
+import org.beangle.sashub.service.repo.SnapshotHelper
 import org.beangle.webmvc.support.ActionSupport
 import org.beangle.webmvc.view.View
 
-import java.io.{File, FileInputStream, FileOutputStream}
-import java.util.jar.Manifest
-import java.util.zip.{ZipEntry, ZipFile}
+import java.io.FileOutputStream
 
 /** 管理版本号为SNAPSHOT的war包
  */
@@ -40,7 +38,7 @@ class SnapshotAction extends ActionSupport {
     val tmpFile = java.nio.file.Files.createTempFile("artifact", "war").toFile
     if (part.nonEmpty) {
       IOs.copy(part.get.getInputStream, new FileOutputStream(tmpFile))
-      val msg = SnapshotAction.upload(tmpFile, part.get.getSubmittedFileName)
+      val msg = SnapshotHelper.upload(tmpFile, part.get.getSubmittedFileName)
       tmpFile.delete()
       redirect("index", msg)
     } else {
@@ -48,64 +46,4 @@ class SnapshotAction extends ActionSupport {
     }
   }
 
-}
-
-object SnapshotAction {
-
-  def main(args: Array[String]): Unit = {
-    upload(new File("D:\\workspace\\beangle\\otk\\target\\beangle-otk-ws-0.0.19-20250806.182112-1.war"), "beangle-otk-ws-0.0.19-20250806.182112-1.war")
-  }
-
-  def upload(tmpFile: File, fileName: String): String = {
-    findManifest(tmpFile) match {
-      case None => "没有发现上传的SNAPSHOT.war"
-      case Some(manifest) =>
-        val attributes = manifest.getMainAttributes
-        val symbolicName = attributes.getValue("Bundle-SymbolicName")
-        if (null == symbolicName) {
-          "找不到MANIFEST.MF中找不到Bundle-SymbolicName属性"
-        } else {
-          val version = attributes.getValue("Bundle-Version")
-          val groupId = Strings.substringBeforeLast(symbolicName, ".")
-          val artifactId = Strings.substringAfterLast(symbolicName, ".")
-          var path = SystemInfo.user.home + "/.m2/snapshots/"
-          path += groupId.replace('.', '/')
-          path += "/"
-          path += artifactId
-          path += "/"
-          path += version
-          path += "/"
-          path += fileName
-          new File(path).getParentFile.mkdirs()
-          IOs.copy(new FileInputStream(tmpFile), new FileOutputStream(new File(path)))
-          "上传成功"
-        }
-    }
-  }
-
-  private def findManifest(file: File): Option[Manifest] = {
-    val buffer = new Array[Byte](1024)
-    val zipFile = new ZipFile(file)
-    val entries = zipFile.entries
-    var entry: ZipEntry = null
-
-    // 遍历所有条目查找目标文件
-    while (entries.hasMoreElements && null == entry) {
-      val currentEntry = entries.nextElement
-      val entryName = currentEntry.getName
-      val lastSlashIndex = entryName.lastIndexOf('/')
-      val entryFileName = if (lastSlashIndex >= 0) entryName.substring(lastSlashIndex + 1) else entryName
-      if (entryFileName == "MANIFEST.MF") {
-        entry = currentEntry
-      }
-    }
-    if (null != entry) {
-      val is = zipFile.getInputStream(entry)
-      val manifest = new Manifest(is)
-      is.close()
-      Some(manifest)
-    } else {
-      None
-    }
-  }
 }
