@@ -20,7 +20,7 @@ package org.beangle.sashub.service.repo
 import org.beangle.commons.collection.Collections
 import org.beangle.commons.io.IOs
 import org.beangle.commons.lang.{Objects, Strings, SystemInfo}
-import org.beangle.commons.logging.{Logger, Logging}
+import org.beangle.commons.logging.Logging
 
 import java.io.{File, FileInputStream, FileOutputStream}
 import java.util.jar.Manifest
@@ -28,18 +28,23 @@ import java.util.zip.{ZipEntry, ZipFile}
 
 object SnapshotHelper extends Logging {
 
-  def upload(tmpFile: File, fileName: String): String = {
+  def upload(tmpFile: File, fileName: String): (Boolean, String) = {
     findManifest(tmpFile) match {
-      case None => "没有发现上传的SNAPSHOT.war"
+      case None =>
+        val error = "上传的文件中没有找到MANIFEST.MF"
+        logger.error(s"Failed upload ${fileName} due to $error")
+        (false, error)
       case Some(manifest) =>
         val attributes = manifest.getMainAttributes
-        val symbolicName = attributes.getValue("Bundle-SymbolicName")
-        if (null == symbolicName) {
-          "找不到MANIFEST.MF中找不到Bundle-SymbolicName属性"
+        val groupId = attributes.getValue("Implementation-Vendor-Id")
+        val artifactId = attributes.getValue("Implementation-Title")
+        val version = attributes.getValue("Implementation-Version")
+
+        if (null == groupId || null == version || null == version) {
+          val error = "找不到MANIFEST.MF中找不到Implementation-*属性"
+          logger.error(s"Failed upload ${fileName} due to $error")
+          (false, error)
         } else {
-          val version = attributes.getValue("Bundle-Version")
-          val groupId = Strings.substringBeforeLast(symbolicName, ".")
-          val artifactId = Strings.substringAfterLast(symbolicName, ".")
           var path = SystemInfo.user.home + "/.m2/snapshots/"
           path += groupId.replace('.', '/')
           path += "/"
@@ -51,7 +56,7 @@ object SnapshotHelper extends Logging {
           new File(path).getParentFile.mkdirs()
           IOs.copy(new FileInputStream(tmpFile), new FileOutputStream(new File(path)))
           logger.info(s"Upload ${path}")
-          "上传成功"
+          (true, "上传成功")
         }
     }
   }

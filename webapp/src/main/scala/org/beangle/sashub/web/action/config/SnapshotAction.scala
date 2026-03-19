@@ -40,7 +40,7 @@ class SnapshotAction extends ActionSupport {
       IOs.copy(part.get.getInputStream, new FileOutputStream(tmpFile))
       val msg = SnapshotHelper.upload(tmpFile, part.get.getSubmittedFileName)
       tmpFile.delete()
-      redirect("index", msg)
+      redirect("index", msg._2)
     } else {
       redirect("index", "没有发现上传的SNAPSHOT.war")
     }

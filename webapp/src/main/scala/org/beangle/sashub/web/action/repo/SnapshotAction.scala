@@ -96,9 +96,9 @@ class SnapshotAction extends ActionSupport {
       if (usertoken == EmsApp.properties.get("snapshot.usertoken").orNull) {
         val tmpFile = java.nio.file.Files.createTempFile("artifact", "war").toFile
         IOs.copy(request.getInputStream, new FileOutputStream(tmpFile))
-        val msg = SnapshotHelper.upload(tmpFile, getPath("fileName"))
+        val rs = SnapshotHelper.upload(tmpFile, getPath("fileName"))
         tmpFile.delete()
-        Status.Ok
+        if (rs._1) then Status.Ok else  Status(500)
       } else {
         Status.Forbidden
       }
