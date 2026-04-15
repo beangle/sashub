@@ -26,7 +26,7 @@ function connect(name) {
             //var msgVal = JSON.parse(msg.data); // We're anticipating messages formatted as "{'name':'Csmith1991', 'text':'example'}"
             var termLog = document.getElementById('termLog');
             if(lastCommand) termLog.innerHTML += ('<pre style="background-color:lightgray">' + lastCommand + '</pre>'); // Add to the termLog
-            termLog.innerHTML += ('<pre>' + msg.data + '</pre>'); // Add to the termLog
+            termLog.innerHTML += ('<pre><xmp>' + msg.data + '</xmp></pre>'); // Add to the termLog
             //termLog.innerHTML += '<p>' + msgVal.name + ': ' + msgVal.text + '</p>'; // Add to the termLog
             termLog.scrollTop = termLog.scrollHeight; // Scroll termLog to bottom
             if(msg.data=='admin is connected.'){

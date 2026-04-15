@@ -34,7 +34,7 @@
 <div id="term" style="display:none;">
     <input id="text" type="text" value="/connect " placeholder="press enter to submit" onkeydown="chat(event);" style="width:500px;" /> <button id="send" onclick="chat({which: 13});">Send</button> <button id="disconnect" onclick="endConnection();">Disconnect</button>
 </div>
-<script src="${b.base}/static/scripts/websocket.js?v=2"></script>
+<script src="${b.base}/static/scripts/websocket.js?v=3"></script>
 <script>
   jQuery(document).ready(function(){
     jQuery("#connect").click();
