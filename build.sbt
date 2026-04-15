@@ -25,23 +25,11 @@ ThisBuild / homepage := Some(url("http://beangle.github.io/sashub/index.html"))
 ThisBuild / resolvers += Resolver.mavenLocal
 
 lazy val root = (project in file("."))
-  .settings()
-  .aggregate(core, webapp)
-
-lazy val core = (project in file("core"))
-  .settings(
-    name := "beangle-sashub-core",
-    common,
-    crossPaths := false,
-    libraryDependencies ++= appDepends
-  )
-
-lazy val webapp = (project in file("webapp"))
   .enablePlugins(WarPlugin, TomcatPlugin)
   .settings(
-    name := "beangle-sashub-webapp",
+    name := "beangle-sashub",
     common,
+    libraryDependencies ++= appDepends,
     crossPaths := false
-  ).dependsOn(core)
+  )
 
-publish / skip := true
