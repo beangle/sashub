@@ -30,6 +30,8 @@ class Profile extends LongId with Named {
 
   var title: String = _
 
+  var key: String = _
+
   var sasVersion: String = _
 
   var localRepo: String = _

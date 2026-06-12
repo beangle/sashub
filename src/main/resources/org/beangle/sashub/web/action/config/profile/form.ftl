@@ -4,6 +4,7 @@
 [@b.form action=b.rest.save(profile) theme="list"]
   [@b.textfield label="common.name" name="profile.name" value="${profile.name!}"  required="true" maxlength="100" /]
   [@b.textfield label="标题" name="profile.title" value="${profile.title!}" required="true" maxlength="50"/]
+  [@b.textfield label="Key" name="profile.key" value="${profile.key!}" maxlength="100"/]
   [@b.select name="profile.org.id" items=orgs label="组织" value=profile.org! option="id,title"/]
   [@b.textfield label="版本" name="profile.sasVersion" value=profile.sasVersion!  required="true" maxlength="50"/]
   [@b.textfield label="IP" name="profile.ip" value=profile.ip! required="true" maxlength="50"/]
