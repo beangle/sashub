@@ -31,14 +31,12 @@ import java.io.{File, FileInputStream, FileOutputStream}
 
 class SnapshotAction extends ActionSupport {
 
-  @mapping("{path*}", method = "head")
+  @mapping(value = "{path*}", methods = "head")
   def access(): View = {
     val path = getPath()
-    val ext = getExt(path)
     val res = ActionContext.current.response
-    val localPath = SystemInfo.user.home + "/.m2/snapshots/" + path
-    if (path.endsWith("-SNAPSHOT" + ext)) {
-      SnapshotHelper.findLatest(path) match {
+    if (SnapshotHelper.isLatestRequest(path)) {
+      SnapshotHelper.resolve(path) match {
         case None => Status.NotFound
         case Some(f) =>
           res.addHeader("latest", f.getName)
@@ -57,18 +55,16 @@ class SnapshotAction extends ActionSupport {
     }
   }
 
-  @mapping("{path*}", method = "get")
+  @mapping(value = "{path*}", methods = "get")
   def download(): View = {
     val path = getPath()
-    val ext = getExt(path)
-
-    val localPath = SystemInfo.user.home + "/.m2/snapshots/" + path
-    if (path.endsWith("-SNAPSHOT" + ext)) {
-      SnapshotHelper.findLatest(path) match {
+    val res = ActionContext.current.response
+    if (SnapshotHelper.isLatestRequest(path)) {
+      SnapshotHelper.resolve(path) match {
         case None => Status.NotFound
         case Some(f) =>
           val request = ActionContext.current.request
-          ActionContext.current.response.sendRedirect(request.getContextPath + "/repo/snapshot/" +
+          res.sendRedirect(request.getContextPath + "/repo/snapshot/" +
             Strings.substringBeforeLast(path, "/") + "/" + f.getName)
           Status.Ok
       }
@@ -77,7 +73,7 @@ class SnapshotAction extends ActionSupport {
       val target = new File(root + path)
       if (target.exists()) {
         val is = new FileInputStream(target)
-        IOs.copy(is, ActionContext.current.response.getOutputStream)
+        IOs.copy(is, res.getOutputStream)
         Status.Ok
       } else {
         Status.NotFound
@@ -85,7 +81,7 @@ class SnapshotAction extends ActionSupport {
     }
   }
 
-  @mapping("upload/{fileName}", method = "post")
+  @mapping(value = "upload/{fileName}", methods = "post")
   def upload(@param("fileName") fileName: String): View = {
     val request = ActionContext.current.request
     val authorizationHeader = request.getHeader("Authorization")
@@ -103,12 +99,6 @@ class SnapshotAction extends ActionSupport {
         Status.Forbidden
       }
     }
-  }
-
-  private def getExt(path: String): String = {
-    var ext = Strings.substringAfterLast(path, ".")
-    if (Strings.isNotEmpty(ext)) ext = "." + ext
-    ext
   }
 
   private def getPath(name: String = "path"): String = {
