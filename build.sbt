@@ -30,6 +30,7 @@ lazy val root = (project in file("."))
     name := "beangle-sashub",
     common,
     libraryDependencies ++= appDepends,
+    snapshotRepoUrl := "https://sas.openurp.net/sas/repo/snapshot/upload/{fileName}",
     crossPaths := false
   )
 
