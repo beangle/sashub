@@ -33,6 +33,26 @@ import java.io.{FileInputStream, FileOutputStream}
   *
   * 上传地址为 `/repo/native/upload/{仓库内相对路径}`,例如
   * `/repo/native/upload/org/beangle/beangle-ems-portal/4.20.14-SNAPSHOT/beangle-ems-portal-4.20.14-SNAPSHOT-linux-amd64.tar.gz.sha1`
+  *
+  * 下载地址为 `/repo/native/{仓库内相对路径}`(GET/HEAD),例如
+  *
+  * 1. 下载带时间戳的具体构件:
+  * {{{
+  * curl -O https://sas.openurp.net/sas/repo/native/org/beangle/beangle-ems-portal/4.20.14-SNAPSHOT/beangle-ems-portal-4.20.14-SNAPSHOT-20260913.103113-1-linux-amd64.tar.gz
+  * }}}
+  *
+  * 2. 用不带时间戳的SNAPSHOT别名下载最新构件(重定向到上者,`HEAD` 的响应头 `latest` 给出实际文件名):
+  * {{{
+  * curl -O https://sas.openurp.net/sas/repo/native/org/beangle/beangle-ems-portal/4.20.14-SNAPSHOT/beangle-ems-portal-4.20.14-SNAPSHOT-linux-amd64.tar.gz
+  * }}}
+  *
+  * 3. 下载增量补丁(同样可以省略时间戳,取最新一份):
+  * {{{
+  * curl -O https://sas.openurp.net/sas/repo/native/org/beangle/beangle-ems-portal/4.20.14-SNAPSHOT/beangle-ems-portal-4.20.13_4.20.14-SNAPSHOT-linux-amd64.tar.gz.diff
+  * }}}
+  *
+  * 4. 校验文件和上面遵循同样的规则,把文件名换成 `...-linux-amd64.tar.gz.sha1`、
+  * `beangle-ems-portal-4.20.13_4.20.14-SNAPSHOT-linux-amd64.tar.gz.diff.sha1` 即可。
   */
 class NativeAction extends ActionSupport {
 

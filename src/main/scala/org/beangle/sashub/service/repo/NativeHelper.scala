@@ -29,28 +29,41 @@ import java.nio.file.{Files, StandardCopyOption}
   *
   * 落盘时上传路径即仓库内的相对路径,如
   * `org/beangle/beangle-ems-portal/4.20.14-SNAPSHOT/beangle-ems-portal-4.20.14-SNAPSHOT-linux-amd64.tar.gz`。
+  * 与war/jar一样按maven布局归档: 正式版本落在 `<home>/repository`,开发版(`-SNAPSHOT`)
+  * 落在 `<home>/snapshots`,`home` 默认 `~/.m2`;路径里的版本目录(文件所在目录)决定用哪个根。
   * 与 [[SnapshotHelper]] 不同,这里的构件不是war/jar,没有MANIFEST.MF可以解析坐标,坐标完全由上传路径决定。
   *
   * 不含时间戳的SNAPSHOT请求解析到时间戳最新的同名构件,如
   * `beangle-ems-portal-4.20.13_4.20.14-SNAPSHOT-linux-amd64.tar.gz.diff` 解析到
   * `beangle-ems-portal-4.20.13_4.20.14-SNAPSHOT-20260913.101500-1-linux-amd64.tar.gz.diff`。
   */
-class NativeHelper(val root: File) extends Logging {
+class NativeHelper(val home: File) extends Logging {
+
+  /** 正式版本(非SNAPSHOT)仓库根: `<home>/repository` */
+  def repositoryRoot: File = new File(home, "repository")
+
+  /** 开发版(SNAPSHOT)仓库根: `<home>/snapshots` */
+  def snapshotRoot: File = new File(home, "snapshots")
+
+  /** 路径对应的仓库根: 版本目录带 `-SNAPSHOT` 的走快照仓库,其余走正式仓库。 */
+  def rootOf(path: String): File = {
+    val versionDir = new File(path).getParent
+    if (null != versionDir && versionDir.endsWith(NativeHelper.SnapshotMark)) snapshotRoot else repositoryRoot
+  }
+
+  def fileOf(path: String): File = new File(rootOf(path), path)
 
   /** 构件尚未上传时sha1校验文件的暂存目录,内部保持与仓库一致的目录结构 */
-  private def pendingDir: File = new File(root, ".pending")
-
-  def fileOf(path: String): File = new File(root, path)
+  private def pendingDir(path: String): File = new File(rootOf(path), ".pending")
 
   /** 仓库内的相对路径,用作下载url */
   def relativePath(file: File): String = {
-    val base = root.getAbsolutePath
     val absolute = file.getAbsolutePath
-    if (absolute.startsWith(base + File.separator)) {
-      Strings.replace(absolute.substring(base.length + 1), File.separator, "/")
-    } else {
-      file.getName
-    }
+    val base = Seq(repositoryRoot, snapshotRoot)
+      .map(_.getAbsolutePath)
+      .find(root => absolute.startsWith(root + File.separator))
+    base.map(root => Strings.replace(absolute.substring(root.length + 1), File.separator, "/"))
+      .getOrElse(file.getName)
   }
 
   /** 解析请求路径对应的实际文件:不带时间戳的SNAPSHOT请求返回时间戳最新的同名构件 */
@@ -119,7 +132,7 @@ class NativeHelper(val root: File) extends Logging {
       (false, error)
     } else {
       val artifactPath = Strings.substringBeforeLast(path, NativeHelper.ChecksumSuffix)
-      val target = if (fileOf(artifactPath).exists()) fileOf(path) else new File(pendingDir, path)
+      val target = if (fileOf(artifactPath).exists()) fileOf(path) else new File(pendingDir(path), path)
       saveChecksum(bytes, target)
       (true, "上传成功")
     }
@@ -142,7 +155,7 @@ class NativeHelper(val root: File) extends Logging {
 
   /** 构件上传后,把此前先到达并暂存的sha1校验文件移动到构件旁边 */
   private def movePendingChecksum(path: String, artifact: File): Unit = {
-    val pending = new File(pendingDir, path + NativeHelper.ChecksumSuffix)
+    val pending = new File(pendingDir(path), path + NativeHelper.ChecksumSuffix)
     if (pending.exists()) {
       val target = new File(artifact.getParentFile, artifact.getName + NativeHelper.ChecksumSuffix)
       Files.move(pending.toPath, target.toPath, StandardCopyOption.REPLACE_EXISTING)
@@ -163,8 +176,8 @@ object NativeHelper {
 
   private[repo] val TimestampPattern = """\d{8}\.\d{6}-\d+""".r
 
-  /** 默认仓库: `~/.m2/natives` */
-  def default: NativeHelper = new NativeHelper(new File(SystemInfo.user.home + "/.m2/natives"))
+  /** 默认仓库: `~/.m2`(正式版 `<home>/repository`,快照版 `<home>/snapshots`) */
+  def default: NativeHelper = new NativeHelper(new File(SystemInfo.user.home + "/.m2"))
 
   /** 是否为sha1校验文件,如xxx.tar.gz.sha1/xxx.tar.gz.diff.sha1 */
   def isChecksum(path: String): Boolean = path.endsWith(ChecksumSuffix)

@@ -31,6 +31,8 @@ class NativeHelperTest extends AnyFunSpec with Matchers {
   private val version = "4.20.14-SNAPSHOT"
   private val distName = "beangle-ems-portal-4.20.14-SNAPSHOT-linux-amd64.tar.gz"
   private val distPath = s"org/beangle/beangle-ems-portal/$version/$distName"
+  private val releaseName = "beangle-ems-portal-4.20.13-linux-amd64.tar.gz"
+  private val releasePath = s"org/beangle/beangle-ems-portal/4.20.13/$releaseName"
 
   describe("NativeHelper") {
     it("uploads a distribution and stores its sha1 checksum besides it") {
@@ -60,7 +62,7 @@ class NativeHelperTest extends AnyFunSpec with Matchers {
 
         val artifact = repo.fileOf(distPath)
         artifact.exists() shouldBe false
-        val pending = new File(repo.root, s".pending/$distPath.sha1")
+        val pending = new File(repo.snapshotRoot, s".pending/$distPath.sha1")
         pending.exists() shouldBe true
 
         repo.upload(dist, distPath)._1 shouldBe true
@@ -87,9 +89,25 @@ class NativeHelperTest extends AnyFunSpec with Matchers {
       repo.resolve("../outside.tar.gz") shouldBe None
     }
 
+    it("routes releases to <home>/repository and snapshots to <home>/snapshots") {
+      withRepo { repo =>
+        repo.rootOf(distPath) shouldBe repo.snapshotRoot
+        repo.rootOf(releasePath) shouldBe repo.repositoryRoot
+        repo.fileOf(distPath) shouldBe new File(repo.snapshotRoot, distPath)
+        repo.fileOf(releasePath) shouldBe new File(repo.repositoryRoot, releasePath)
+
+        val dist = tempFile("dist.tar.gz", "native distribution")
+        repo.upload(dist, releasePath)._1 shouldBe true
+        new File(repo.repositoryRoot, releasePath).exists() shouldBe true
+        repo.relativePath(new File(repo.repositoryRoot, releasePath)) shouldBe releasePath
+        repo.relativePath(new File(repo.snapshotRoot, distPath)) shouldBe distPath
+        dist.delete()
+      }
+    }
+
     it("resolves a -SNAPSHOT alias to the newest timestamped distribution and delta") {
       withRepo { repo =>
-        val dir = new File(repo.root, s"org/beangle/beangle-ems-portal/$version")
+        val dir = new File(repo.snapshotRoot, s"org/beangle/beangle-ems-portal/$version")
         val delta = "beangle-ems-portal-4.20.13_4.20.14-SNAPSHOT-linux-amd64.tar.gz.diff"
         val oldDelta = "beangle-ems-portal-4.20.13_4.20.14-SNAPSHOT-20260912.101500-1-linux-amd64.tar.gz.diff"
         val newDelta = "beangle-ems-portal-4.20.13_4.20.14-SNAPSHOT-20260913.101500-1-linux-amd64.tar.gz.diff"
