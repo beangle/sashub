@@ -29,6 +29,25 @@ import org.beangle.webmvc.view.{Status, View}
 
 import java.io.{File, FileInputStream, FileOutputStream}
 
+/** 管理快照构件(war/jar)及其sha1校验文件。
+  *
+  * 上传地址为 `/repo/snapshot/upload/{文件名}`,例如
+  * `/repo/snapshot/upload/beangle-commons-5.0.0-20250803.132600-31.jar`
+  *
+  * 下载地址为 `/repo/snapshot/{仓库内相对路径}`(GET/HEAD),例如
+  *
+  * 1. 下载带时间戳的具体构件:
+  * {{{
+  * curl -O https://sas.openurp.net/sas/repo/snapshot/org/beangle/commons/beangle-commons/5.0.0-SNAPSHOT/beangle-commons-5.0.0-20250803.132600-31.jar
+  * }}}
+  *
+  * 2. 用不带时间戳的SNAPSHOT别名下载最新构件(重定向到上者,`HEAD` 的响应头 `latest` 给出实际文件名):
+  * {{{
+  * curl -O https://sas.openurp.net/sas/repo/snapshot/org/beangle/commons/beangle-commons/5.0.0-SNAPSHOT/beangle-commons-5.0.0-SNAPSHOT.jar
+  * }}}
+  *
+  * 3. 校验文件遵循同样的规则,把上面的文件名换成 `beangle-commons-5.0.0-SNAPSHOT.jar.sha1` 即可。
+  */
 class SnapshotAction extends ActionSupport {
 
   @mapping(value = "{path*}", methods = "head")
