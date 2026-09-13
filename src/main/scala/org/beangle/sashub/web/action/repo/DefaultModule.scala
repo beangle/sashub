@@ -22,6 +22,7 @@ import org.beangle.commons.cdi.BindModule
 class DefaultModule extends BindModule {
 
   protected override def binding(): Unit = {
+    bind(classOf[NativeAction])
     bind(classOf[SnapshotAction])
   }
 
