@@ -26,6 +26,7 @@ resolvers += Resolver.mavenLocal
 
 lazy val root = (project in file("."))
   .enablePlugins(WarPlugin, TomcatPlugin)
+  .enablePlugins(AotPlugin,MetaPlugin,ProxyPlugin)
   .settings(
     name := "beangle-sashub",
     common,
