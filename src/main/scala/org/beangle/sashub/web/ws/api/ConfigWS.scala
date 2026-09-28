@@ -29,14 +29,15 @@ import org.beangle.webmvc.support.{ActionSupport, ParamSupport, ServletSupport}
 import org.beangle.webmvc.view.{Status, View}
 
 import scala.collection.mutable
+import scala.compiletime.uninitialized
 
 /**
  * 获取配置信息
  */
 class ConfigWS extends ActionSupport with ParamSupport with ServletSupport {
 
-  var profileService: ProfileService = _
-  var entityDao: EntityDao = _
+  var profileService: ProfileService = uninitialized
+  var entityDao: EntityDao = uninitialized
 
   def server(@param("profile") name: String): View = {
     val profiles = getProfile(name)

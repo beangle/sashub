@@ -25,7 +25,7 @@
 
   <Farms>
     [#list farms as farm]
-    <Farm name="${farm.name}" engine="${farm.engine.name}" [#if farm.enableAccessLog]enableAccessLog="true"[/#if] maxHeapSize="${farm.maxHeapSize}M">
+    <Farm name="${farm.name}" engine="${farm.engine.name}" maxHeapSize="${farm.maxHeapSize}M">
       [#if farm.serverOptions??]
       <ServerOptions>${farm.serverOptions}</ServerOptions>
       [/#if]
@@ -38,7 +38,6 @@
       [#list farm.servers as server]
       <Server name="${server.name}" host="${server.host.name}" http="${server.httpPort}"[#rt]
          [#if server.maxHeapSize>0] maxHeapSize="${server.maxHeapSize}M"[/#if][#t]
-         [#if server.enableAccessLog] enableAccessLog="true"[/#if][#t]
          [#if server.proxyHttpPort??] proxyHttpPort="${server.proxyHttpPort}"[/#if][#t]
          [#if server.proxyOptions??] proxyOptions="${server.proxyOptions}"[/#if][#t]
          />[#lt]

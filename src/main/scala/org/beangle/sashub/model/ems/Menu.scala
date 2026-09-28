@@ -21,10 +21,11 @@ import org.beangle.data.model.IntId
 import org.beangle.data.model.pojo.{Enabled, Hierarchical, Named, Remark}
 
 import scala.collection.mutable
+import scala.compiletime.uninitialized
 
 class Menu extends IntId with Named with Enabled with Hierarchical[Menu] with Remark {
-  var app: App = _
-  var enName: String = _
+  var app: App = uninitialized
+  var enName: String = uninitialized
   var entry: Option[Resource] = None
   var params: Option[String] = None
   var resources: mutable.Set[Resource] = new mutable.HashSet[Resource]

@@ -23,11 +23,12 @@ import org.beangle.sashub.service.ProfileService
 import org.beangle.sashub.web.action.helper.ProfileHelper
 import org.beangle.webmvc.view.View
 import org.beangle.she.webmvc.RestfulAction
+import scala.compiletime.uninitialized
 
 /** 应用部署管理
  */
 class WebappAction extends RestfulAction[Webapp] {
-  var profileService: ProfileService = _
+  var profileService: ProfileService = uninitialized
   def upgrade(): View = {
     val webapps = entityDao.find(classOf[Webapp], getLongIds("webapp"))
     webapps.foreach { webapp =>

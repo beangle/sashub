@@ -28,9 +28,10 @@ import org.beangle.sashub.web.action.helper.AppHelper
 import org.beangle.webmvc.annotation.ignore
 import org.beangle.she.webmvc.RestfulAction
 import org.beangle.webmvc.view.View
+import scala.compiletime.uninitialized
 
 class MenuAction extends RestfulAction[Menu] {
-  var menuService: MenuService = _
+  var menuService: MenuService = uninitialized
 
   protected override def indexSetting(): Unit = {
     val apps = entityDao.getAll(classOf[App])

@@ -19,12 +19,13 @@ package org.beangle.sashub.model.config
 
 import org.beangle.data.model.IntId
 import org.beangle.data.model.pojo.{Coded, Named}
+import scala.compiletime.uninitialized
 
 class Organization extends IntId with Named {
 
-  var title: String = _
+  var title: String = uninitialized
 
-  var shortTitle: String = _
+  var shortTitle: String = uninitialized
 
-  var logoUrl: String = _
+  var logoUrl: String = uninitialized
 }

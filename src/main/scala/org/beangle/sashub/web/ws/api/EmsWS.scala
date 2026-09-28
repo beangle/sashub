@@ -24,11 +24,12 @@ import org.beangle.sashub.service.ProfileService
 import org.beangle.webmvc.annotation.{mapping, param}
 import org.beangle.webmvc.support.{ActionSupport, ParamSupport, ServletSupport}
 import org.beangle.webmvc.view.{Status, View}
+import scala.compiletime.uninitialized
 
 class EmsWS extends ActionSupport with ParamSupport with ServletSupport {
 
-  var profileService: ProfileService = _
-  var entityDao: EntityDao = _
+  var profileService: ProfileService = uninitialized
+  var entityDao: EntityDao = uninitialized
 
   @mapping("menus/{appName}")
   def menus(@param("profile") profileName: String, @param("appName") appName: String): View = {

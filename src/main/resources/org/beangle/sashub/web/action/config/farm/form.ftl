@@ -7,7 +7,6 @@
       [@b.textfield label="common.name" name="farm.name" value=farm.name! required="true" maxlength="100" /]
       [@b.select label="引擎" name="farm.engine.id" items=engines required="true" value=farm.engine!/]
       [@b.number label="堆上限" name="farm.maxHeapSize" value=farm.maxHeapSize! required="true" max="100000" maxlength="10" comment="MB"/]
-      [@b.radios label="访问日志" name="farm.enableAccessLog" value=farm.enableAccessLog items="1:启用,0:忽略"/]
       [@b.number label="最大线程" name="farm.http.maxThreads" value=(farm.http.maxThreads)! required="true" maxlength="10"/]
       [@b.textfield label="进程参数" name="farm.serverOptions" value=farm.serverOptions! maxlength="300" style="width:500px;" /]
       [@b.textarea label="代理配置" name="farm.proxyOptions" value=farm.proxyOptions! maxlength="300" rows="6" cols="80" style="width:500px;" /]

@@ -17,34 +17,36 @@
 
 package org.beangle.sashub.model.config
 
+import org.beangle.commons.bean.Properties
 import org.beangle.data.model.LongId
 import org.beangle.data.model.pojo.Named
 import org.beangle.commons.collection.Collections
 import org.beangle.sashub.model.micdn.AssetGroup
 
 import scala.collection.mutable
+import scala.compiletime.uninitialized
 
 class Profile extends LongId with Named {
 
-  var org: Organization = _
+  var org: Organization = uninitialized
 
-  var title: String = _
+  var title: String = uninitialized
 
-  var key: String = _
+  var key: String = uninitialized
 
-  var sasVersion: String = _
+  var sasVersion: String = uninitialized
 
-  var localRepo: String = _
+  var localRepo: String = uninitialized
 
-  var remoteRepo: String = _
+  var remoteRepo: String = uninitialized
 
-  var ip: String = _
+  var ip: String = uninitialized
 
   var hostname: Option[String] = None
 
   var httpPort: Int = 80
 
-  var proxyEngine: String = _
+  var proxyEngine: String = uninitialized
 
   var maxconn: Int = 30000
 

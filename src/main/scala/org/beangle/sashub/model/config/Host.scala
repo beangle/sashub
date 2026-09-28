@@ -22,27 +22,28 @@ import org.beangle.data.model.pojo.Named
 import org.beangle.commons.collection.Collections
 
 import scala.collection.mutable
+import scala.compiletime.uninitialized
 
 class Host extends LongId with Named {
 
-  var profile: Profile = _
+  var profile: Profile = uninitialized
 
-  var ip: String = _
+  var ip: String = uninitialized
 
   /** 内存多少兆 */
-  var memory: Int = _
+  var memory: Int = uninitialized
 
   /** 软件平台(os) */
-  var platform: Platform = _
+  var platform: Platform = uninitialized
 
   /** 操作系统版本 */
-  var platformVersion: String = _
+  var platformVersion: String = uninitialized
 
   /** CPU核心数 */
-  var cores: Int = _
+  var cores: Int = uninitialized
 
   /** CPU描述 */
-  var cpu: String = _
+  var cpu: String = uninitialized
 
   /** 操作系统特性 */
   var features: mutable.Set[PlatformFeature] = Collections.newSet[PlatformFeature]

@@ -18,6 +18,7 @@
 package org.beangle.sashub.model.micdn
 
 import org.beangle.data.model.IntId
+import scala.compiletime.uninitialized
 
 object AssetBundle {
   def apply(asset: Asset, uri: String): AssetBundle = {
@@ -40,7 +41,7 @@ object AssetBundle {
 class AssetBundle extends IntId {
   var gav: Option[String] = None
   var location: Option[String] = None
-  var asset: Asset = _
+  var asset: Asset = uninitialized
 
   def uri: String = {
     gav match

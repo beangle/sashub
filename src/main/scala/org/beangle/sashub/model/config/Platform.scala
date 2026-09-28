@@ -19,10 +19,11 @@ package org.beangle.sashub.model.config
 
 import org.beangle.data.model.IntId
 import org.beangle.data.model.pojo.Named
+import scala.compiletime.uninitialized
 
 class Platform extends IntId with Named {
 
-  var majorVersion: String = _
+  var majorVersion: String = uninitialized
 
-  var fonticon: String = _
+  var fonticon: String = uninitialized
 }

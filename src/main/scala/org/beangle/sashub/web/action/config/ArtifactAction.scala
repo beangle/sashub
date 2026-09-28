@@ -23,12 +23,13 @@ import org.beangle.sashub.service.config.ArtifactVersionRefresher
 import org.beangle.webmvc.annotation.mapping
 import org.beangle.webmvc.view.View
 import org.beangle.she.webmvc.RestfulAction
+import scala.compiletime.uninitialized
 
 class ArtifactAction extends RestfulAction[Artifact] {
 
-  var profileService: ProfileService = _
+  var profileService: ProfileService = uninitialized
 
-  var artifactVersionRefresher: ArtifactVersionRefresher = _
+  var artifactVersionRefresher: ArtifactVersionRefresher = uninitialized
 
   @mapping(value = "{id}")
   override def info(id: String): View = {

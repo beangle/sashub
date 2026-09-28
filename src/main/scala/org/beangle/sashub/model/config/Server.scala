@@ -20,19 +20,18 @@ package org.beangle.sashub.model.config
 import org.beangle.commons.lang.Strings
 import org.beangle.data.model.LongId
 import org.beangle.data.model.pojo.Named
+import scala.compiletime.uninitialized
 
 /** 服务器
  */
 class Server extends LongId with Named {
-  var farm: Farm = _
+  var farm: Farm = uninitialized
 
-  var host: Host = _
+  var host: Host = uninitialized
 
-  var maxHeapSize: Int = _
+  var maxHeapSize: Int = uninitialized
 
-  var httpPort: Int = _
-
-  var enableAccessLog: Boolean = _
+  var httpPort: Int = uninitialized
 
   var proxyOptions: Option[String] = None
 

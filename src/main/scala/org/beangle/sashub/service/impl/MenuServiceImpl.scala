@@ -24,9 +24,10 @@ import org.beangle.data.model.util.Hierarchicals
 import org.beangle.sashub.model.ems.{App, Menu, Resource}
 import org.beangle.sashub.service.MenuService
 import org.beangle.security.authz.Scope
+import scala.compiletime.uninitialized
 
 class MenuServiceImpl extends MenuService {
-  var entityDao: EntityDao = _
+  var entityDao: EntityDao = uninitialized
 
   def move(menu: Menu, location: Menu, index: Int): Unit = {
     menu.parent foreach { p =>

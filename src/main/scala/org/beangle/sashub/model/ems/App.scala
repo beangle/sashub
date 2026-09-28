@@ -19,24 +19,25 @@ package org.beangle.sashub.model.ems
 
 import org.beangle.data.model.IntId
 import org.beangle.data.model.pojo.Named
+import scala.compiletime.uninitialized
 
 /** EMS应用信息
  */
 class App extends IntId with Named {
   /** 分组 */
-  var group: AppGroup = _
+  var group: AppGroup = uninitialized
   /** artifactId */
-  var artifactId: String = _
+  var artifactId: String = uninitialized
   /** 标题 */
-  var title: String = _
+  var title: String = uninitialized
   /** 导航类型 */
-  var navStyle: String = _
+  var navStyle: String = uninitialized
   /** 外部依赖(数据源、其他服务) */
   var services: Option[String] = None
   /** 部署上下文 */
-  var base: String = _
+  var base: String = uninitialized
   /** 入口地址 */
-  var url: String = _
+  var url: String = uninitialized
 
   def qualifiedTitle: String = {
     group.title + "." + title

@@ -20,9 +20,10 @@ package org.beangle.sashub.service.impl
 import org.beangle.data.dao.{EntityDao, OqlBuilder}
 import org.beangle.sashub.model.config.{Organization, Profile}
 import org.beangle.sashub.service.ProfileService
+import scala.compiletime.uninitialized
 
 class DefaultProfileService extends ProfileService {
-  var entityDao: EntityDao = _
+  var entityDao: EntityDao = uninitialized
 
   def getProfile(name: String): Option[Profile] = {
     val dotIdx = name.indexOf('.')

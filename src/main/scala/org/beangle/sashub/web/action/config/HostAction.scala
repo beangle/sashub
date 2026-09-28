@@ -26,9 +26,10 @@ import org.beangle.webmvc.context.{ActionContext, Params}
 import org.beangle.webmvc.view.View
 import org.beangle.web.servlet.util.CookieUtils
 import org.beangle.she.webmvc.RestfulAction
+import scala.compiletime.uninitialized
 
 class HostAction extends RestfulAction[Host] {
-  var profileService: ProfileService = _
+  var profileService: ProfileService = uninitialized
 
   override protected def indexSetting(): Unit = {
     ProfileHelper.setRememberedProfile(entityDao)

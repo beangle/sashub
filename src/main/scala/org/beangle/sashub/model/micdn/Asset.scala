@@ -23,10 +23,11 @@ import org.beangle.data.model.IntId
 import org.beangle.data.model.pojo.{Named, Remark}
 
 import scala.collection.mutable
+import scala.compiletime.uninitialized
 
 class Asset extends IntId, Named, Remark {
-  var group: AssetGroup = _
-  var base: String = _
+  var group: AssetGroup = uninitialized
+  var base: String = uninitialized
   var bundles: mutable.Buffer[AssetBundle] = Collections.newBuffer[AssetBundle]
 
   @transient

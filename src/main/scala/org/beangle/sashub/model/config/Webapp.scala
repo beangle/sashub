@@ -20,15 +20,16 @@ package org.beangle.sashub.model.config
 import org.beangle.data.model.LongId
 
 import scala.collection.mutable
+import scala.compiletime.uninitialized
 
 class Webapp extends LongId {
-  var artifact: Artifact = _
-  var profile: Profile = _
-  var version: String = _
+  var artifact: Artifact = uninitialized
+  var profile: Profile = uninitialized
+  var version: String = uninitialized
 
   var unpack: Boolean = false
   var targets: mutable.Buffer[Server] = new mutable.ArrayBuffer[Server]
-  var contextPath: String = _
+  var contextPath: String = uninitialized
 
   var libs: Option[String] = None
 

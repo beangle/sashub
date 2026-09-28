@@ -22,6 +22,7 @@ import org.beangle.data.model.pojo.{Named, Remark}
 import org.beangle.sashub.model.config.Engine.jee
 
 import scala.collection.mutable
+import scala.compiletime.uninitialized
 
 object Engine {
   val jee = Seq("tomcat", "undertow", "jetty")
@@ -32,9 +33,9 @@ class Engine extends IntId with Named with Remark {
 
   var profile: Option[Profile] = None
 
-  var typ: String = _
+  var typ: String = uninitialized
 
-  var version: String = _
+  var version: String = uninitialized
 
   var jspSupport: Boolean = false
 

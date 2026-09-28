@@ -22,26 +22,25 @@ import org.beangle.data.model.{Component, LongId}
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
+import scala.compiletime.uninitialized
 
 class Farm extends LongId with Named {
 
-  var profile: Profile = _
+  var profile: Profile = uninitialized
 
-  var engine: Engine = _
+  var engine: Engine = uninitialized
 
   var serverOptions: Option[String] = None
 
   var proxyOptions: Option[String] = None
 
-  var enableAccessLog: Boolean = _
-
   var hosts: mutable.Buffer[Host] = new ArrayBuffer[Host]
 
   var servers: mutable.Buffer[Server] = new mutable.ArrayBuffer[Server]
 
-  var maxHeapSize: Int = _
+  var maxHeapSize: Int = uninitialized
 
-  var http: Connector = _
+  var http: Connector = uninitialized
 
   def newServer(name: String, http: Int): Server = {
     val server = new Server()

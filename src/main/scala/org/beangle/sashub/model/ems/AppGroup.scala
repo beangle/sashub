@@ -19,8 +19,9 @@ package org.beangle.sashub.model.ems
 
 import org.beangle.data.model.IntId
 import org.beangle.data.model.pojo.Named
+import scala.compiletime.uninitialized
 
 class AppGroup extends IntId with Named {
 
-  var title: String = _
+  var title: String = uninitialized
 }

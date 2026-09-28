@@ -22,12 +22,13 @@ import org.beangle.sashub.model.config.{Engine, Profile}
 import org.beangle.sashub.service.ProfileService
 import org.beangle.webmvc.view.View
 import org.beangle.she.webmvc.RestfulAction
+import scala.compiletime.uninitialized
 
 /** Engine管理
  */
 class EngineAction extends RestfulAction[Engine] {
 
-  var profileService: ProfileService = _
+  var profileService: ProfileService = uninitialized
 
   override protected def editSetting(entity: Engine): Unit = {
     put("profiles", profileService.getAll())

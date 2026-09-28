@@ -20,11 +20,12 @@ package org.beangle.sashub.model.ems
 import org.beangle.data.model.IntId
 import org.beangle.data.model.pojo.{Enabled, Named, Remark}
 import org.beangle.security.authz.{Resource, Scope}
+import scala.compiletime.uninitialized
 
 class Resource extends IntId with Named with Enabled with Remark {
-  var app: App = _
+  var app: App = uninitialized
   var scope = Scope.Public
-  var title: String = _
+  var title: String = uninitialized
   var actions: Option[String] = None
 
   def description: String = {

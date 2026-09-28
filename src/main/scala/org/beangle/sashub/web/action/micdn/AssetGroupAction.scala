@@ -20,10 +20,11 @@ package org.beangle.sashub.web.action.micdn
 import org.beangle.sashub.model.micdn.AssetGroup
 import org.beangle.sashub.service.ProfileService
 import org.beangle.she.webmvc.RestfulAction
+import scala.compiletime.uninitialized
 
 class AssetGroupAction extends RestfulAction[AssetGroup] {
 
-  var profileService: ProfileService = _
+  var profileService: ProfileService = uninitialized
 
   override protected def editSetting(context: AssetGroup): Unit = {
     put("profiles", profileService.getAll())

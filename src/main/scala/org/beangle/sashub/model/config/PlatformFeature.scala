@@ -22,16 +22,17 @@ import org.beangle.data.model.LongId
 import org.beangle.data.model.pojo.Named
 
 import scala.collection.mutable
+import scala.compiletime.uninitialized
 
 class PlatformFeature extends LongId with Named {
 
   var scripts: mutable.Buffer[PlatformFeatureScript] = Collections.newBuffer[PlatformFeatureScript]
 
-  var logo: String = _
+  var logo: String = uninitialized
 
-  var version: String = _
+  var version: String = uninitialized
 
-  var description: String = _
+  var description: String = uninitialized
 
   var dependencies: mutable.Buffer[PlatformFeature] = Collections.newBuffer
 

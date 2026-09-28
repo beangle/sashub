@@ -18,18 +18,19 @@
 package org.beangle.sashub.model.config
 
 import org.beangle.data.model.LongId
+import scala.compiletime.uninitialized
 
 /** 组件
  */
 class Artifact extends LongId {
-  var groupId: String = _
-  var artifactId: String = _
-  var packaging: String = _
+  var groupId: String = uninitialized
+  var artifactId: String = uninitialized
+  var packaging: String = uninitialized
   var classifier: Option[String] = None
-  var latestVersion: String = _
-  var title: String = _
-  var description: String = _
-  var resolveSupport: Boolean = _
+  var latestVersion: String = uninitialized
+  var title: String = uninitialized
+  var description: String = uninitialized
+  var resolveSupport: Boolean = uninitialized
   var jspSupport: Boolean = false
   var websocketSupport: Boolean = false
   var profile: Option[Profile] = None
@@ -37,7 +38,7 @@ class Artifact extends LongId {
   var arch: Arch = Arch.Noarch
   /** 推荐上下文设置
    */
-  var contextPath: String = _
+  var contextPath: String = uninitialized
 
   def name: String = s"$groupId $artifactId"
 

@@ -23,11 +23,12 @@ import org.beangle.sashub.service.ProfileService
 import org.beangle.sashub.web.action.helper.ProfileHelper
 import org.beangle.webmvc.view.View
 import org.beangle.she.webmvc.RestfulAction
+import scala.compiletime.uninitialized
 
 /** 群集管理
  */
 class FarmAction extends RestfulAction[Farm] {
-  var profileService: ProfileService = _
+  var profileService: ProfileService = uninitialized
 
   override def search(): View = {
     ProfileHelper.remember("farm.profile.id")

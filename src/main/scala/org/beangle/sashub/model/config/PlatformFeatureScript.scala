@@ -18,18 +18,19 @@
 package org.beangle.sashub.model.config
 
 import org.beangle.data.model.LongId
+import scala.compiletime.uninitialized
 
 /**
  * 操作系统功能的检查和安装脚本
  */
 class PlatformFeatureScript extends LongId {
 
-  var feature: PlatformFeature = _
+  var feature: PlatformFeature = uninitialized
 
   /** 软件平台(os) */
-  var platform: Platform = _
+  var platform: Platform = uninitialized
 
   /** 相应的脚本 */
-  var scripts: String = _
+  var scripts: String = uninitialized
 
 }
